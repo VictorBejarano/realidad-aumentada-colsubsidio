@@ -1,0 +1,2 @@
+000.png|C:\Users\victo\OneDrive\Desktop\Plantilla_ARcore\ARcore_SDK_1.7.0\tools\arcoreimg\windows/000.png
+001.jpg|C:\Users\victo\OneDrive\Desktop\Plantilla_ARcore\ARcore_SDK_1.7.0\tools\arcoreimg\windows/001.jpg
