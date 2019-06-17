@@ -300,7 +300,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
                             conD5 = false;
                         }
-                        if(aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE && !conD6){
+                        if((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) && !conD6){
                             augmentedImageMap.get(aux).mediaPlayer.pause();
                             conD6 = true;
                         } else if((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.FULL_TRACKING) && conD6){
@@ -308,12 +308,16 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             conD6 = false;
                         }
 
-//                        if(augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()){
-//                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+                        if(augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()){
+                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+                            fitToScanView.setVisibility(View.VISIBLE);
+                            if(aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE){
+                                conD5 = true;
+                            }
 //
 //                            augmentedImageMap.get(aux).mediaPlayer.pause();
 //                            conD5 = false;
-//                        }else{
+                        }//else{
 //                            if(conditionAux){
 //                                augmentedImageMap.get(aux).mediaPlayer.start();
 //                                Log.e("TAG", "GEO A " + String.valueOf(augmentedImageMap.get(aux).getWorldPosition().length()));
