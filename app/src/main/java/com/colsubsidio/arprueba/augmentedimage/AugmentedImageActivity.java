@@ -63,6 +63,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     public boolean conD3 = true;
     public boolean conD4 = true;
     public boolean conD5 = true;
+    public boolean conD6 = true;
 
     private FrameLayout menuCon;
     private ImageView burguer0;
@@ -299,10 +300,12 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
                             conD5 = false;
                         }
-                        if(aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE){
+                        if(aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE && !conD6){
                             augmentedImageMap.get(aux).mediaPlayer.pause();
-                        } else {
+                            conD6 = true;
+                        } else if((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.FULL_TRACKING) && conD6){
                             augmentedImageMap.get(aux).mediaPlayer.start();
+                            conD6 = false;
                         }
 
 //                        if(augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()){
