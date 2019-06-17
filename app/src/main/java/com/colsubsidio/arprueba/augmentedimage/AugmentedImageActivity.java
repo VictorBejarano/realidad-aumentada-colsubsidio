@@ -271,31 +271,39 @@ public class AugmentedImageActivity extends AppCompatActivity {
 //                }
 //            }
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
             if(conditionInit){
-                if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.FULL_TRACKING) {
-                    if (!conditionAux) {
-                        fitToScanView.setVisibility(View.GONE);
-                        if((aux.getIndex() == 0) && (!conD5)){
-                            augmentedImageMap.get(aux).mediaPlayer.start();
-                            conD5 = true;
-                        }
-                        arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
-                        conditionAux = true;
-                    }
-                } else {
-                    if (conditionAux) {
-                        fitToScanView.setVisibility(View.VISIBLE);
-                        arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
-                        conditionAux = false;
-                    }
-                }
+                //Log.e(TAG, "LP " + String.valueOf(augmentedImageMap.get(aux).getAnchor().getPose().getXAxis()));
+//                if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.FULL_TRACKING) {
+//                    if (!conditionAux) {
+//                        fitToScanView.setVisibility(View.GONE);
+//                        if((aux.getIndex() == 0) && (!conD5)){
+//                            augmentedImageMap.get(aux).mediaPlayer.start();
+//                            conD5 = true;
+//                        }
+//                        arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+//                        conditionAux = true;
+//                    }
+//                } else {
+//                    if (conditionAux) {
+//                        fitToScanView.setVisibility(View.VISIBLE);
+//                        arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+//                        conditionAux = false;
+//                    }
+//                }
+/////////////////////////////
                 switch (aux.getIndex()){
                     case 0:
                         if(conD5){
                             fitToScanView.setVisibility(View.GONE);
                             arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
                             conD5 = false;
+                        }
+                        if(aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE){
+                            augmentedImageMap.get(aux).mediaPlayer.pause();
+                        } else {
+                            augmentedImageMap.get(aux).mediaPlayer.start();
+                            
                         }
 
 //                        if(augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()){
