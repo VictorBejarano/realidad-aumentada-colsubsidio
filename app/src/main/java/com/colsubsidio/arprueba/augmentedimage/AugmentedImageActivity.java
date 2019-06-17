@@ -273,7 +273,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
             if(conditionInit){
-                //Log.e(TAG, "LP " + String.valueOf(augmentedImageMap.get(aux).getAnchor().getPose().getXAxis()));
+
 //                if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.FULL_TRACKING) {
 //                    if (!conditionAux) {
 //                        fitToScanView.setVisibility(View.GONE);
@@ -303,7 +303,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             augmentedImageMap.get(aux).mediaPlayer.pause();
                         } else {
                             augmentedImageMap.get(aux).mediaPlayer.start();
-                            
                         }
 
 //                        if(augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()){
