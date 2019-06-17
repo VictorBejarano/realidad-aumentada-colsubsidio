@@ -179,16 +179,18 @@ public class AugmentedImageNode extends AnchorNode {
                 mediaPlayer.setSurface(texture.getSurface());
                 mediaPlayer.setLooping(false);
 
+                float videoWidth = mediaPlayer.getVideoWidth();
+                float videoHeight = mediaPlayer.getVideoHeight();
 
+                VIDEO_HEIGHT_METERS = image.getExtentX() * (videoHeight / videoWidth);
 
-                localPosition.set( -0.0f * image.getExtentX(), 0.0f, -0.0f * image.getExtentZ());
+                localPosition.set( -0.0f * image.getExtentX(), 0.0f, VIDEO_HEIGHT_METERS * 0.5f);//-0.0f * image.getExtentZ());
                 objectNode = new Node();
                 objectNode.setParent(this);
                 objectNode.setLocalRotation(Quaternion.axisAngle(Vector3.right(), -90.0f));
                 objectNode.setLocalPosition(localPosition);
-                float videoWidth = mediaPlayer.getVideoWidth();
-                float videoHeight = mediaPlayer.getVideoHeight();
-                VIDEO_HEIGHT_METERS = image.getExtentX() * (videoHeight / videoWidth);
+
+
 
                 objectNode.setLocalScale(
                         new Vector3(
