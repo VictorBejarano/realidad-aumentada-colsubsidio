@@ -314,19 +314,10 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             if(aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE){
                                 conD5 = true;
                             }
-//
-//                            augmentedImageMap.get(aux).mediaPlayer.pause();
-//                            conD5 = false;
-                        }//else{
-//                            if(conditionAux){
-//                                augmentedImageMap.get(aux).mediaPlayer.start();
-//                                Log.e("TAG", "GEO A " + String.valueOf(augmentedImageMap.get(aux).getWorldPosition().length()));
-//                                //Log.e("TAG", "GEO B " + String.valueOf(augmentedImageMap.get(aux).mediaPlayer.getDuration()));
-//                            }else{
-//                                augmentedImageMap.get(aux).mediaPlayer.pause();
-//                            }
-//                        }
+                        }
                         break;
+                    case 1:
+                        arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
                 }
 
             }

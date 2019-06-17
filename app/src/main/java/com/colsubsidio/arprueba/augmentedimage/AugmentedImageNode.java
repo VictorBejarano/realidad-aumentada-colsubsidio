@@ -5,6 +5,8 @@ import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.colsubsidio.arprueba.R;
@@ -26,6 +28,8 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings({"AndroidApiChecker"})
 public class AugmentedImageNode extends AnchorNode {
     private static final String TAG = "AugmentedImageNode";
+
+    private DisplayMetrics metrics = new DisplayMetrics();
 
     public MediaPlayer mediaPlayer;
     private AugmentedImage image;
@@ -58,7 +62,7 @@ public class AugmentedImageNode extends AnchorNode {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
             TextLView000 =
                     ViewRenderable.builder()
-                            .setView(context,R.layout.test_view000)
+                            .setView(context,R.layout.view_text000)
                             .build();
 //            spider =
 //                    ModelRenderable.builder()
@@ -219,13 +223,15 @@ public class AugmentedImageNode extends AnchorNode {
                                         return null;
                                     });
                 }
+                Vector3 localRotation = new Vector3();
                 //Tamano del gif en metros (250dp del layout -> 1metro)
-                localPosition.set( -image.getExtentX()*0.25f, 0.0f, 0.0f);//image.getExtentZ() * 0.5f
+                localPosition.set( image.getExtentX()*1.0f, 0.0f, 0.5f * image.getExtentZ());//image.getExtentZ() * 0.5f
                 //Escala del gif en porcentaje
-                localScale.set(image.getExtentX()*0.5f, image.getExtentZ()*0.5f, 1.0f);
+                localScale.set(image.getExtentX(), image.getExtentX(), 1.0f);
+                localRotation.set(-90.0f, 0.0f, 0.0f);
                 objectNode = new Node();
                 objectNode.setParent(this);
-                objectNode.setLocalRotation(Quaternion.axisAngle(Vector3.right(), -90.0f));
+                objectNode.setLocalRotation(Quaternion.eulerAngles(localRotation));
                 objectNode.setLocalPosition(localPosition);
                 objectNode.setLocalScale(localScale);
                 objectNode.setRenderable(TextLView000.getNow(null));

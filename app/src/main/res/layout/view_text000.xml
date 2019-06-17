@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:id="@+id/viewText">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlueColsubsidio"
+            android:padding="15dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed volutpat elementum finibus. Donec eget turpis fermentum, dapibus sapien vitae, rutrum ligula. Morbi ut efficitur orci. Phasellus finibus pharetra elit vitae finibus. In at molestie tortor. Nunc quis dolor mi. Donec aliquam turpis quis lorem lobortis, ac viverra massa tristique. Aenean lobortis volutpat laoreet. Nunc ultricies fringilla eros a commodo. Fusce ac diam in nibh mattis viverra nec non sapien. Vestibulum gravida nunc vel aliquam sodales. Nullam viverra aliquet quam at viverra. Vestibulum feugiat porttitor justo, eu scelerisque diam sagittis at."
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="11sp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>
