@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private float MenuDp = 250.0f;
 
     private DisplayMetrics metrics = new DisplayMetrics();
+    private MediaPlayer audioView000;
 
     public boolean conD = true;
     public boolean conD2 = true;
@@ -64,6 +66,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     public boolean conD4 = true;
     public boolean conD5 = true;
     public boolean conD6 = true;
+    public boolean conD7 = true;
 
     private FrameLayout menuCon;
     private ImageView burguer0;
@@ -123,6 +126,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
 //        modelLoader = new ModelLoader(this);
 //
 //        modelLoader.loadModel(SPIDER_RENDERABLE, R.raw.spider_3);
+        audioView000 = MediaPlayer.create(this, R.raw.audio000);
 
         installRequested = false;
     }
@@ -317,7 +321,13 @@ public class AugmentedImageActivity extends AppCompatActivity {
                         }
                         break;
                     case 1:
-                        arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+                        if(conD7){
+                            fitToScanView.setVisibility(View.GONE);
+                            arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+                            audioView000.start();
+                        }
+
+
                 }
 
             }
