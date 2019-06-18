@@ -23,6 +23,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.colsubsidio.arprueba.R;
@@ -55,6 +57,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private AnimatorSet anim2 = new AnimatorSet();
     private AnimatorSet anim3 = new AnimatorSet();
     private AnimatorSet anim4 = new AnimatorSet();
+    private AnimatorSet anim5 = new AnimatorSet();
     private float MenuDp = 250.0f;
 
     private DisplayMetrics metrics = new DisplayMetrics();
@@ -67,11 +70,14 @@ public class AugmentedImageActivity extends AppCompatActivity {
     public boolean conD5 = true;
     public boolean conD6 = true;
     public boolean conD7 = true;
+    public boolean conD8 = true;
 
     private FrameLayout menuCon;
+    private LinearLayout playBar;
     private ImageView burguer0;
     private ImageView burguer1;
     private ImageView burguer2;
+    private ImageButton buttonPlay;
 
     private static final int SPIDER_RENDERABLE = 1;
     private static final String TAG = "AugmentedImageActivity";
@@ -113,9 +119,11 @@ public class AugmentedImageActivity extends AppCompatActivity {
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
         fitToScanView = findViewById(R.id.image_view_fit_to_scan);
         menuCon = findViewById(R.id.menuview);
+        playBar = findViewById(R.id.playbar);
         burguer0 = findViewById(R.id.burguer0);
         burguer1 = findViewById(R.id.burguer1);
         burguer2 = findViewById(R.id.burguer2);
+        buttonPlay = findViewById(R.id.buttonplay);
         arFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
         maybeEnableArButton();
         //getWindow().setAllowEnterTransitionOverlap(false);
@@ -144,6 +152,9 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
 
         menuCon.setX(-(MenuDp * metrics.densityDpi) / 160.0f);
+
+        playBar.setY(metrics.heightPixels);
+        //playBar.setY(metrics.heightPixels-(48 * metrics.densityDpi) / 160.0f);
 
         ImageView LogoCol = (ImageView) findViewById(R.id.logoColsubsidio);
         ImageView LogoCulEdu = (ImageView) findViewById(R.id.logoCulEdu);
@@ -324,7 +335,12 @@ public class AugmentedImageActivity extends AppCompatActivity {
                         if(conD7){
                             fitToScanView.setVisibility(View.GONE);
                             arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+                            ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(playBar,"translationY",metrics.heightPixels-(48 * metrics.densityDpi) / 160.0f);
+                            alphaAnim0.setDuration(1000);
+                            alphaAnim0.start();
+                            buttonPlay.setImageResource(R.drawable.ic_button_pause);
                             audioView000.start();
+                            conD7 = false;
                         }
 
 
@@ -363,6 +379,17 @@ public class AugmentedImageActivity extends AppCompatActivity {
                 CameraPermissionHelper.launchPermissionSettings(this);
             }
             finish();
+        }
+    }
+    public void playButton(View view){
+        if(conD8) {
+            audioView000.pause();
+            buttonPlay.setImageResource(R.drawable.ic_button_play);
+            conD8=false;
+        }else{
+            audioView000.start();
+            buttonPlay.setImageResource(R.drawable.ic_button_pause);
+            conD8=true;
         }
     }
     public void mainButton(View view){
