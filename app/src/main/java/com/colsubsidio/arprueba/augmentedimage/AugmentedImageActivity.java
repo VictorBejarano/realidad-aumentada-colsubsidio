@@ -71,6 +71,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     public boolean conD6 = true;
     public boolean conD7 = true;
     public boolean conD8 = true;
+    public boolean conD9 = true;
 
     private FrameLayout menuCon;
     private LinearLayout playBar;
@@ -90,7 +91,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private ArFragment arFragment;
     private AugmentedImageNode aux2;
     private AugmentedImage aux;
-    private AugmentedImage aux3 = aux;
+    private AugmentedImage aux3;
     private ModelRenderable spiderRenderable;
     private ModelLoader modelLoader;
     private int condicion2 = 0;
@@ -332,6 +333,12 @@ public class AugmentedImageActivity extends AppCompatActivity {
                                 conD5 = true;
                             }
                         }
+                        //obligatorio para todos
+                        if(!conD7){
+                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux3));
+                            conD7 = true;
+                            animPlay();
+                        }
                         break;
                     case 1:
                         if(conD7){
@@ -344,9 +351,9 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             audioView000.start();
                             new AsyncTaskVerificatorC().execute();
                             conD7 = false;
+                            aux3 = aux;
                         }
-
-
+                        break;
                 }
 
             }
@@ -393,13 +400,11 @@ public class AugmentedImageActivity extends AppCompatActivity {
             audioView000.start();
             buttonPlay.setImageResource(R.drawable.ic_button_pause);
             conD8=true;
+            if(!conD9){
+                new AsyncTaskVerificatorC().execute();
+            }
         }
     }
-
-    public void slideAudio(View view){
-
-    }
-
     public void mainButton(View view){
         if(!conD){
 //        arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
@@ -538,7 +543,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
 
                         conD = false;
-                        prueba();
+                        //prueba();
                     }
                 }
                 catch (Exception e) {
@@ -591,7 +596,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
         }
     }
-
     private class AsyncTaskVerificatorC extends AsyncTask<String,Integer,String> {
 
         @Override
@@ -606,12 +610,10 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            conD2 = true;
-            while (conD2) {
+            conD9 = true;
+            while (conD9) {
 
                 try {
-
-
                     //Log.e(TAG, "Boom " + seekAudio.getProgress());
                     seekAudio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
@@ -637,6 +639,14 @@ public class AugmentedImageActivity extends AppCompatActivity {
                     seekAudio.setMax(audioView000.getDuration());
                     seekAudio.setProgress(audioView000.getCurrentPosition());
 
+                    if(audioView000.getCurrentPosition() >= audioView000.getDuration()){
+                        buttonPlay.setImageResource(R.drawable.ic_button_play);
+                        conD9=false;
+                        conD8=false;
+                        seekAudio.setProgress(0);
+//                        animPlay();
+                    }
+
                 }
                 catch (Exception e) {
                     return e.getLocalizedMessage();
@@ -650,10 +660,10 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
 
 
-    public void prueba(){
-
-
-
+    public void animPlay(){
+        ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(playBar,"translationY",metrics.heightPixels);
+        alphaAnim0.setDuration(1000);
+        alphaAnim0.start();
     }
 
 
