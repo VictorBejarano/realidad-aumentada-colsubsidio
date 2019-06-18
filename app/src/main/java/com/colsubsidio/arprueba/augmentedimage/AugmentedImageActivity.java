@@ -78,6 +78,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private ImageView burguer1;
     private ImageView burguer2;
     private ImageButton buttonPlay;
+    private SeekBar seekAudio;
 
     private static final int SPIDER_RENDERABLE = 1;
     private static final String TAG = "AugmentedImageActivity";
@@ -124,6 +125,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
         burguer1 = findViewById(R.id.burguer1);
         burguer2 = findViewById(R.id.burguer2);
         buttonPlay = findViewById(R.id.buttonplay);
+        seekAudio = findViewById(R.id.seekaudio);
         arFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
         maybeEnableArButton();
         //getWindow().setAllowEnterTransitionOverlap(false);
@@ -340,6 +342,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             alphaAnim0.start();
                             buttonPlay.setImageResource(R.drawable.ic_button_pause);
                             audioView000.start();
+                            new AsyncTaskVerificatorC().execute();
                             conD7 = false;
                         }
 
@@ -392,6 +395,11 @@ public class AugmentedImageActivity extends AppCompatActivity {
             conD8=true;
         }
     }
+
+    public void slideAudio(View view){
+
+    }
+
     public void mainButton(View view){
         if(!conD){
 //        arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
@@ -573,6 +581,62 @@ public class AugmentedImageActivity extends AppCompatActivity {
                         conD2 = false;
 
                     }
+                }
+                catch (Exception e) {
+                    return e.getLocalizedMessage();
+                }
+            }
+            return "Button Pressed";
+
+
+        }
+    }
+
+    private class AsyncTaskVerificatorC extends AsyncTask<String,Integer,String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            conD2 = true;
+            while (conD2) {
+
+                try {
+
+
+                    //Log.e(TAG, "Boom " + seekAudio.getProgress());
+                    seekAudio.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+                            audioView000.pause();
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+                            audioView000.seekTo(seekAudio.getProgress());
+                            if(conD8) {
+                                audioView000.start();
+                            }
+
+                        }
+                    });
+                    seekAudio.setMax(audioView000.getDuration());
+                    seekAudio.setProgress(audioView000.getCurrentPosition());
+
                 }
                 catch (Exception e) {
                     return e.getLocalizedMessage();

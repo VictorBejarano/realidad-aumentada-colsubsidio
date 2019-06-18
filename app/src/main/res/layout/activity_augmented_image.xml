@@ -42,7 +42,7 @@
             app:srcCompat="@drawable/ic_button_play" />
 
         <SeekBar
-            android:id="@+id/seekBar2"
+            android:id="@+id/seekaudio"
             android:layout_width="320dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
