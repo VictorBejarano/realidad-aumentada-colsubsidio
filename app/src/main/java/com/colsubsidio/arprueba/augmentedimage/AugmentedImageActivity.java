@@ -3,7 +3,7 @@ package com.colsubsidio.arprueba.augmentedimage;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -11,10 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Fade;
-import android.transition.Slide;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.colsubsidio.arprueba.R;
 import com.colsubsidio.arprueba.augmentedimage.helpers.CameraPermissionHelper;
@@ -57,7 +55,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private AnimatorSet anim2 = new AnimatorSet();
     private AnimatorSet anim3 = new AnimatorSet();
     private AnimatorSet anim4 = new AnimatorSet();
-    private AnimatorSet anim5 = new AnimatorSet();
+    //private AnimatorSet anim5 = new AnimatorSet();
     private float MenuDp = 250.0f;
 
     private DisplayMetrics metrics = new DisplayMetrics();
@@ -80,6 +78,8 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private ImageView burguer2;
     private ImageButton buttonPlay;
     private SeekBar seekAudio;
+    private ImageButton buttonFull;
+    private VideoView videoFull;
 
     private static final int SPIDER_RENDERABLE = 1;
     private static final String TAG = "AugmentedImageActivity";
@@ -92,6 +92,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private AugmentedImageNode aux2;
     private AugmentedImage aux;
     private AugmentedImage aux3;
+    private AugmentedImage aux4;
     private ModelRenderable spiderRenderable;
     private ModelLoader modelLoader;
     private int condicion2 = 0;
@@ -99,6 +100,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private boolean conditionAux = false;
     private ImageView fitToScanView;
 
+    @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,10 +129,12 @@ public class AugmentedImageActivity extends AppCompatActivity {
         burguer2 = findViewById(R.id.burguer2);
         buttonPlay = findViewById(R.id.buttonplay);
         seekAudio = findViewById(R.id.seekaudio);
+        videoFull = findViewById(R.id.videofull);
         arFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
         maybeEnableArButton();
         //getWindow().setAllowEnterTransitionOverlap(false);
         fitToScanView.setAlpha(0.0f);
+        videoFull.setVideoURI(R.raw.video);
 
 
 
@@ -157,6 +161,8 @@ public class AugmentedImageActivity extends AppCompatActivity {
         menuCon.setX(-(MenuDp * metrics.densityDpi) / 160.0f);
 
         playBar.setY(metrics.heightPixels);
+
+
         //playBar.setY(metrics.heightPixels-(48 * metrics.densityDpi) / 160.0f);
 
         ImageView LogoCol = (ImageView) findViewById(R.id.logoColsubsidio);
@@ -313,10 +319,16 @@ public class AugmentedImageActivity extends AppCompatActivity {
 /////////////////////////////
                 switch (aux.getIndex()){
                     case 0:
+
                         if(conD5){
                             fitToScanView.setVisibility(View.GONE);
                             arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+                            ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(buttonFull,"alpha",0.0f,1.0f);
+                            alphaAnim1.setDuration(500);
+                            alphaAnim1.start();
+
                             conD5 = false;
+                            aux4 = aux;
                         }
                         if((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) && !conD6){
                             augmentedImageMap.get(aux).mediaPlayer.pause();
@@ -337,6 +349,8 @@ public class AugmentedImageActivity extends AppCompatActivity {
                         if(!conD7){
                             arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux3));
                             conD7 = true;
+                            audioView000.pause();
+                            audioView000.seekTo(0);
                             animPlay();
                         }
                         break;
@@ -353,15 +367,16 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             conD7 = false;
                             aux3 = aux;
                         }
+                        if(!conD5){
+                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux4));
+                            conD5 = true;
+                            //audioView000.stop();
+                            //animPlay();
+                        }
                         break;
                 }
-
             }
-
-
-
         }
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //        if(conditionInit){
 //            if(aux3 != aux){
@@ -376,8 +391,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
 //        aux3=aux;
 
     }
-
-
     //Cierra la app si no tiene los permisos
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] results) {
@@ -657,14 +670,9 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
         }
     }
-
-
-
     public void animPlay(){
         ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(playBar,"translationY",metrics.heightPixels);
         alphaAnim0.setDuration(1000);
         alphaAnim0.start();
     }
-
-
 }

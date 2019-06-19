@@ -19,7 +19,25 @@
         android:layout_gravity="center"
         android:contentDescription="@string/fit_image_to_scan"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_marco" />
+        android:src="@drawable/ic_marco"
+        android:visibility="gone" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/botonfull"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="?attr/actionBarItemBackground"
+            android:onClick="burgerButton"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_fullscreen_icon" />
+    </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/playbar"
@@ -28,7 +46,8 @@
         android:alpha="0.60"
         android:background="@android:color/background_dark"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageButton
             android:id="@+id/buttonplay"
@@ -59,7 +78,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.54"
-        android:background="@android:color/background_light">
+        android:background="@android:color/background_light"
+        android:visibility="gone">
 
     </FrameLayout>
 
@@ -67,7 +87,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageButton
             android:id="@+id/botonar"
@@ -90,7 +111,8 @@
         android:id="@+id/menuview"
         android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:translationX="0dp">
+        android:translationX="0dp"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -132,13 +154,15 @@
         android:background="?attr/actionBarItemBackground"
         android:onClick="burgerButton"
         android:padding="15dp"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/burguer0"
@@ -165,7 +189,8 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/mainview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -203,6 +228,11 @@
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
+
+    <VideoView
+        android:id="@+id/videofull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </FrameLayout>
 
