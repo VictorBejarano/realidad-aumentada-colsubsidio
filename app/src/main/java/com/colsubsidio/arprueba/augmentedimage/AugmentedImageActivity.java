@@ -4,7 +4,11 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +30,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.colsubsidio.arprueba.R;
+import com.colsubsidio.arprueba.VideoActivity;
 import com.colsubsidio.arprueba.augmentedimage.helpers.CameraPermissionHelper;
 import com.colsubsidio.arprueba.augmentedimage.helpers.SnackbarHelper;
 import com.google.ar.core.ArCoreApk;
@@ -129,14 +134,14 @@ public class AugmentedImageActivity extends AppCompatActivity {
         burguer2 = findViewById(R.id.burguer2);
         buttonPlay = findViewById(R.id.buttonplay);
         seekAudio = findViewById(R.id.seekaudio);
-        videoFull = findViewById(R.id.videofull);
+        buttonFull = findViewById(R.id.botonfull);
         arFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
         maybeEnableArButton();
         //getWindow().setAllowEnterTransitionOverlap(false);
         fitToScanView.setAlpha(0.0f);
-        videoFull.setVideoURI(R.raw.video);
 
 
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 //        modelLoader = new ModelLoader(this);
 //
@@ -161,6 +166,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
         menuCon.setX(-(MenuDp * metrics.densityDpi) / 160.0f);
 
         playBar.setY(metrics.heightPixels);
+        buttonFull.setAlpha(0.0f);
 
 
         //playBar.setY(metrics.heightPixels-(48 * metrics.densityDpi) / 160.0f);
@@ -324,7 +330,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             fitToScanView.setVisibility(View.GONE);
                             arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
                             ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(buttonFull,"alpha",0.0f,1.0f);
-                            alphaAnim1.setDuration(500);
+                            alphaAnim1.setDuration(1000);
                             alphaAnim1.start();
 
                             conD5 = false;
@@ -501,6 +507,11 @@ public class AugmentedImageActivity extends AppCompatActivity {
             conD3=true;
         }
 
+    }
+    public void fullButton(View view){
+        onPause();
+        Intent intent = new Intent(this, VideoActivity.class);
+        startActivity(intent);
     }
     //Verifica si el dispositivo soporta ARCORE
     void maybeEnableArButton() {
