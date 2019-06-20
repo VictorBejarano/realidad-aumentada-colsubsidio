@@ -509,9 +509,13 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
     }
     public void fullButton(View view){
-        onPause();
-        Intent intent = new Intent(this, VideoActivity.class);
-        startActivity(intent);
+        if (!conD5) {
+            onPause();
+            Intent intent = new Intent(this, VideoActivity.class);
+            intent.putExtra("stateVideo", augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition());
+            augmentedImageMap.get(aux).mediaPlayer.pause();
+            startActivity(intent);
+        }
     }
     //Verifica si el dispositivo soporta ARCORE
     void maybeEnableArButton() {

@@ -20,10 +20,14 @@ public class VideoActivity extends AppCompatActivity {
     private float ratioDisplay = 0.0f;
     private float ratioVideo = 0.0f;
 
+    Bundle datos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+        datos = getIntent().getExtras();
+        Integer continueVideo = datos.getInt("stateVideo");
         videoFull = findViewById(R.id.videofull);
         String path = "android.resource://" + getPackageName() + "/" + R.raw.video;
         Uri uri = Uri.parse(path);
@@ -59,8 +63,10 @@ public class VideoActivity extends AppCompatActivity {
 
         Log.e("VideoActivity", "Parse " + String.valueOf(display_mode));
         videoFull.getHeight();
-
+        videoFull.seekTo(continueVideo);
         videoFull.start();
+
+
 
     }
 }
