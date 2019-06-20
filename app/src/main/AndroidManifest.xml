@@ -47,7 +47,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VideoActivity"></activity>
+        <activity android:name=".VideoActivity" android:configChanges="screenSize|orientation"></activity>
     </application>
 
 </manifest>
