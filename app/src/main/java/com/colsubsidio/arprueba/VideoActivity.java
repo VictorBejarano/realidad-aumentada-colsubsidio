@@ -5,12 +5,16 @@ import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.media.VolumeShaper;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.VideoView;
+
+import com.colsubsidio.arprueba.augmentedimage.AugmentedImageActivity;
 
 public class VideoActivity extends AppCompatActivity {
     public VideoView videoFull;
@@ -19,6 +23,9 @@ public class VideoActivity extends AppCompatActivity {
     private float scX = 0.0f;
     private float ratioDisplay = 0.0f;
     private float ratioVideo = 0.0f;
+    private SeekBar seekVideo;
+
+    public boolean conD = true;
 
     Bundle datos;
 
@@ -26,6 +33,9 @@ public class VideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+
+        seekVideo = findViewById(R.id.seekvideo);
+
         datos = getIntent().getExtras();
         Integer continueVideo = datos.getInt("stateVideo");
         videoFull = findViewById(R.id.videofull);
@@ -60,13 +70,64 @@ public class VideoActivity extends AppCompatActivity {
         videoFull.setScaleX(scX);
         videoFull.setScaleY(scX);
 
-
-        Log.e("VideoActivity", "Parse " + String.valueOf(display_mode));
-        videoFull.getHeight();
         videoFull.seekTo(continueVideo);
         videoFull.start();
+        new AsyncTaskVerificator().execute();
 
 
 
+    }
+
+    private class AsyncTaskVerificator extends AsyncTask<String,Integer,String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            conD = true;
+            while (conD) {
+
+                try {
+                    //Log.e(TAG, "Boom " + seekAudio.getProgress());
+                    seekVideo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+                            videoFull.pause();
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+                            videoFull.seekTo(seekVideo.getProgress());
+//                            if(conD8) {
+                            videoFull.start();
+//                            }
+
+                        }
+                    });
+                    if(videoFull.isPlaying()) {
+                        seekVideo.setMax(videoFull.getDuration());
+                        seekVideo.setProgress(videoFull.getCurrentPosition());
+
+//
+                        if ((videoFull.getCurrentPosition() >= videoFull.getDuration())) {
+//                        buttonPlay.setImageResource(R.drawable.ic_button_play);
+                            conD = false;
+//                        conD8=false;
+//                        seekAudio.setProgress(0);
+////                        animPlay();
+                        }
+                    }
+
+                }
+                catch (Exception e) {
+                    return e.getLocalizedMessage();
+                }
+            }
+            return "Button Pressed";
+        }
     }
 }

@@ -664,15 +664,17 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
                         }
                     });
-                    seekAudio.setMax(audioView000.getDuration());
-                    seekAudio.setProgress(audioView000.getCurrentPosition());
+                    if(audioView000.isPlaying()) {
+                        seekAudio.setMax(audioView000.getDuration());
+                        seekAudio.setProgress(audioView000.getCurrentPosition());
 
-                    if(audioView000.getCurrentPosition() >= audioView000.getDuration()){
-                        buttonPlay.setImageResource(R.drawable.ic_button_play);
-                        conD9=false;
-                        conD8=false;
-                        seekAudio.setProgress(0);
+                        if (audioView000.getCurrentPosition() >= audioView000.getDuration()) {
+                            buttonPlay.setImageResource(R.drawable.ic_button_play);
+                            conD9 = false;
+                            conD8 = false;
+                            seekAudio.setProgress(0);
 //                        animPlay();
+                        }
                     }
 
                 }
