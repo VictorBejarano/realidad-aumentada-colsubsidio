@@ -1,5 +1,6 @@
 package com.colsubsidio.arprueba;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
@@ -97,6 +98,17 @@ public class VideoActivity extends AppCompatActivity {
 //                new AugmentedImageActivity.AsyncTaskVerificatorC().execute();
 //            }
         }
+    }
+
+    public void exitFullButton(View view) {
+//        Intent intent = new Intent(this, AugmentedImageActivity.class);
+//        startActivity(intent);
+        Intent i = getIntent();
+        i.putExtra("continuar Video", videoFull.getCurrentPosition());
+        Log.e("VideoActivity", "Bun A " + String.valueOf(videoFull.getCurrentPosition()));
+        setResult(RESULT_OK, i);
+        videoFull.pause();
+        finish();
     }
 
     private class AsyncTaskVerificator extends AsyncTask<String,Integer,String> {

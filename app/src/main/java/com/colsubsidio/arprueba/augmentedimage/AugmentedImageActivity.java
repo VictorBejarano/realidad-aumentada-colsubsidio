@@ -101,6 +101,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private ModelRenderable spiderRenderable;
     private ModelLoader modelLoader;
     private int condicion2 = 0;
+    private int continueVideo = 0;
     private boolean conditionInit = false;
     private boolean conditionAux = false;
     private ImageView fitToScanView;
@@ -514,7 +515,35 @@ public class AugmentedImageActivity extends AppCompatActivity {
             Intent intent = new Intent(this, VideoActivity.class);
             intent.putExtra("stateVideo", augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition());
             augmentedImageMap.get(aux).mediaPlayer.pause();
-            startActivity(intent);
+            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+           // startActivity(intent);
+            startActivityForResult(intent, continueVideo);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Comprobamos si el resultado de la segunda actividad es "RESULT_CANCELED".
+        if (resultCode == RESULT_CANCELED) {
+            // Si es así mostramos mensaje de cancelado por pantalla.
+            Toast.makeText(this, "Resultado cancelado", Toast.LENGTH_SHORT)
+                    .show();
+        } else {
+            // De lo contrario, recogemos el resultado de la segunda actividad.
+            Integer resultado = data.getExtras().getInt("continuar Video");
+            augmentedImageMap.get(aux).mediaPlayer.seekTo(resultado);
+
+            // Y tratamos el resultado en función de si se lanzó para rellenar el
+            // nombre o el apellido.
+//            Log.e(TAG, "Bun " + String.valueOf(resultado));
+//            switch (requestCode) {
+//                case NOMBRE:
+//                    etNombre.setText(resultado);
+//                    break;
+//                case APELLIDO:
+//                    etApellido.setText(resultado);
+//                    break;
+//            }
         }
     }
     //Verifica si el dispositivo soporta ARCORE

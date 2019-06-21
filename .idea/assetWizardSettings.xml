@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_fullscreen_icon" />
-                            <entry key="sourceFile" value="C:\Users\victo\OneDrive\Desktop\fullscreen_icon-icons.com_69521.svg" />
+                            <entry key="outputName" value="ic_icon" />
+                            <entry key="sourceFile" value="C:\Users\victo\OneDrive\Desktop\icon.svg" />
                           </map>
                         </option>
                       </PersistentState>
