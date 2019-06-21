@@ -4,11 +4,8 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.colsubsidio.arprueba.R;
 import com.colsubsidio.arprueba.VideoActivity;
@@ -46,7 +42,7 @@ import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.google.ar.sceneform.rendering.ViewRenderable;
+//import com.google.ar.sceneform.rendering.ViewRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 
 import java.util.Collection;
@@ -84,7 +80,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private ImageButton buttonPlay;
     private SeekBar seekAudio;
     private ImageButton buttonFull;
-    private VideoView videoFull;
 
     private static final int SPIDER_RENDERABLE = 1;
     private static final String TAG = "AugmentedImageActivity";
@@ -92,18 +87,13 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private Session mSession;
     private final SnackbarHelper messageSnackbarHelper = new SnackbarHelper();
     private boolean installRequested;
-    private ViewRenderable testViewRenderable;
     private ArFragment arFragment;
-    private AugmentedImageNode aux2;
     private AugmentedImage aux;
     private AugmentedImage aux3;
     private AugmentedImage aux4;
     private ModelRenderable spiderRenderable;
-    private ModelLoader modelLoader;
-    private int condicion2 = 0;
     private int continueVideo = 0;
     private boolean conditionInit = false;
-    private boolean conditionAux = false;
     private ImageView fitToScanView;
 
     @SuppressLint("WrongViewCast")
@@ -150,11 +140,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
         audioView000 = MediaPlayer.create(this, R.raw.audio000);
 
         installRequested = false;
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
 
 
@@ -191,6 +177,13 @@ public class AugmentedImageActivity extends AppCompatActivity {
         anim.start();
 
         new AsyncTaskVerificator().execute();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
 
         if (augmentedImageMap.isEmpty()) {
             fitToScanView.setVisibility(View.VISIBLE);
@@ -517,6 +510,8 @@ public class AugmentedImageActivity extends AppCompatActivity {
             augmentedImageMap.get(aux).mediaPlayer.pause();
             arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
            // startActivity(intent);
+            conD5 = true;
+            conD6 = true;
             startActivityForResult(intent, continueVideo);
         }
     }
