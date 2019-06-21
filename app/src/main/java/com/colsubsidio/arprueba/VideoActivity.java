@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.VideoView;
@@ -24,8 +26,10 @@ public class VideoActivity extends AppCompatActivity {
     private float ratioDisplay = 0.0f;
     private float ratioVideo = 0.0f;
     private SeekBar seekVideo;
+    private ImageButton buttonPlay;
 
     public boolean conD = true;
+    public boolean conD2 = true;
 
     Bundle datos;
 
@@ -35,6 +39,7 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video);
 
         seekVideo = findViewById(R.id.seekvideo);
+        buttonPlay = findViewById(R.id.buttonplayvideo);
 
         datos = getIntent().getExtras();
         Integer continueVideo = datos.getInt("stateVideo");
@@ -72,10 +77,26 @@ public class VideoActivity extends AppCompatActivity {
 
         videoFull.seekTo(continueVideo);
         videoFull.start();
+        buttonPlay.setImageResource(R.drawable.ic_button_pause);
         new AsyncTaskVerificator().execute();
 
 
 
+    }
+
+    public void playButton(View view){
+        if(conD2) {
+            videoFull.pause();
+            buttonPlay.setImageResource(R.drawable.ic_button_play);
+            conD2=false;
+        }else{
+            videoFull.start();
+            buttonPlay.setImageResource(R.drawable.ic_button_pause);
+            conD2=true;
+//            if(!conD9){
+//                new AugmentedImageActivity.AsyncTaskVerificatorC().execute();
+//            }
+        }
     }
 
     private class AsyncTaskVerificator extends AsyncTask<String,Integer,String> {
@@ -116,7 +137,7 @@ public class VideoActivity extends AppCompatActivity {
                         if ((videoFull.getCurrentPosition() >= videoFull.getDuration())) {
 //                        buttonPlay.setImageResource(R.drawable.ic_button_play);
                             conD = false;
-//                        conD8=false;
+                            //conD2=false;
 //                        seekAudio.setProgress(0);
 ////                        animPlay();
                         }
