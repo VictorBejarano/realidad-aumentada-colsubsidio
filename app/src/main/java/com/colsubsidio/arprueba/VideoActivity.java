@@ -100,12 +100,12 @@ public class VideoActivity extends AppCompatActivity {
     public void exitFullButton(View view) {
 //        Intent intent = new Intent(this, AugmentedImageActivity.class);
 //        startActivity(intent);
-        exitFuntion(videoFull.getCurrentPosition());
+        exitFunction(videoFull.getCurrentPosition());
     }
     public void exitButton(View view){
-        exitFuntion(videoFull.getDuration());
+        exitFunction(videoFull.getDuration());
     }
-    public void exitFuntion(int duration){
+    public void exitFunction(int duration){
         Intent i = getIntent();
         i.putExtra("continuar Video", duration);
         Log.e("VideoActivity", "Bun A " + String.valueOf(videoFull.getCurrentPosition()));
@@ -151,7 +151,7 @@ public class VideoActivity extends AppCompatActivity {
 //
                         if ((videoFull.getCurrentPosition() >= videoFull.getDuration())) {
 //                        buttonPlay.setImageResource(R.drawable.ic_button_play);
-                            exitFuntion(videoFull.getCurrentPosition());
+                            exitFunction(videoFull.getCurrentPosition());
                             conD = false;
                             //conD2=false;
 //                        seekAudio.setProgress(0);

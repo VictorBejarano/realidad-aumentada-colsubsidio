@@ -317,64 +317,68 @@ public class AugmentedImageActivity extends AppCompatActivity {
 //                    }
 //                }
 /////////////////////////////
-                switch (aux.getIndex()){
-                    case 0:
 
-                        if(conD5){
-                            fitToScanView.setVisibility(View.GONE);
-                            arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
-                            ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(buttonFull,"alpha",0.0f,1.0f);
-                            alphaAnim1.setDuration(1000);
-                            alphaAnim1.start();
-
-                            conD5 = false;
-                            aux4 = aux;
-                        }
-                        if((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) && !conD6){
-                            augmentedImageMap.get(aux).mediaPlayer.pause();
-                            conD6 = true;
-                        } else if((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.FULL_TRACKING) && conD6){
-                            augmentedImageMap.get(aux).mediaPlayer.start();
-                            conD6 = false;
-                        }
-
-                        if(augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()){
-                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
-                            fitToScanView.setVisibility(View.VISIBLE);
-                            if(aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE){
-                                conD5 = true;
+                    switch (aux.getIndex()) {
+                        case 0:
+                            if (augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()) {
+                                arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+                                fitToScanView.setVisibility(View.VISIBLE);
+                                if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) {
+                                    conD5 = true;
+                                }
                             }
-                        }
-                        //obligatorio para todos
-                        if(!conD7){
-                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux3));
-                            conD7 = true;
-                            audioView000.pause();
-                            audioView000.seekTo(0);
-                            animPlay();
-                        }
-                        break;
-                    case 1:
-                        if(conD7){
-                            fitToScanView.setVisibility(View.GONE);
-                            arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
-                            ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(playBar,"translationY",metrics.heightPixels-(48 * metrics.densityDpi) / 160.0f);
-                            alphaAnim0.setDuration(1000);
-                            alphaAnim0.start();
-                            buttonPlay.setImageResource(R.drawable.ic_button_pause);
-                            audioView000.start();
-                            new AsyncTaskVerificatorC().execute();
-                            conD7 = false;
-                            aux3 = aux;
-                        }
-                        if(!conD5){
-                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux4));
-                            conD5 = true;
-                            //audioView000.stop();
-                            //animPlay();
-                        }
-                        break;
-                }
+
+                            if (conD5 && (aux.getTrackingMethod() ==
+                                    AugmentedImage.TrackingMethod.FULL_TRACKING)) {
+                                fitToScanView.setVisibility(View.GONE);
+                                arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+                                ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(buttonFull, "alpha", 0.0f, 1.0f);
+                                alphaAnim1.setDuration(1000);
+                                alphaAnim1.start();
+
+                                conD5 = false;
+                                aux4 = aux;
+                            }
+                            if ((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) && !conD6) {
+                                augmentedImageMap.get(aux).mediaPlayer.pause();
+                                conD6 = true;
+                            } else if ((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.FULL_TRACKING) && conD6) {
+                                augmentedImageMap.get(aux).mediaPlayer.start();
+                                conD6 = false;
+                            }
+
+
+                            //obligatorio para todos
+                            if (!conD7) {
+                                arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux3));
+                                conD7 = true;
+                                audioView000.pause();
+                                audioView000.seekTo(0);
+                                animPlay();
+                            }
+                            break;
+                        case 1:
+                            if (conD7) {
+                                fitToScanView.setVisibility(View.GONE);
+                                arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+                                ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(playBar, "translationY", metrics.heightPixels - (48 * metrics.densityDpi) / 160.0f);
+                                alphaAnim0.setDuration(1000);
+                                alphaAnim0.start();
+                                buttonPlay.setImageResource(R.drawable.ic_button_pause);
+                                audioView000.start();
+                                new AsyncTaskVerificatorC().execute();
+                                conD7 = false;
+                                aux3 = aux;
+                            }
+                            if (!conD5) {
+                                arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux4));
+                                conD5 = true;
+                                //audioView000.stop();
+                                //animPlay();
+                            }
+                            break;
+                    }
+
             }
         }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -509,9 +513,14 @@ public class AugmentedImageActivity extends AppCompatActivity {
             intent.putExtra("stateVideo", augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition());
             augmentedImageMap.get(aux).mediaPlayer.pause();
             arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+            ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(buttonFull,"alpha",1.0f,0.0f);
+            alphaAnim1.setDuration(1000);
+            alphaAnim1.start();
+            fitToScanView.setVisibility(View.VISIBLE);
            // startActivity(intent);
             conD5 = true;
             conD6 = true;
+            //aux = null;
             startActivityForResult(intent, continueVideo);
         }
     }
