@@ -71,6 +71,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     public boolean conD7 = true;
     public boolean conD8 = true;
     public boolean conD9 = true;
+    public boolean conD10 = true;
 
     private FrameLayout menuCon;
     private LinearLayout playBar;
@@ -319,7 +320,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
 /////////////////////////////
 
                     switch (aux.getIndex()) {
-                        case 0:
+                        case 0: //case 2:
                             if (augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()) {
                                 arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
                                 fitToScanView.setVisibility(View.VISIBLE);
@@ -375,6 +376,45 @@ public class AugmentedImageActivity extends AppCompatActivity {
                                 conD5 = true;
                                 //audioView000.stop();
                                 //animPlay();
+                            }
+                            break;
+                        case 2:
+
+//                            if (augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()) {
+//                                arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+//                                fitToScanView.setVisibility(View.VISIBLE);
+//                                if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) {
+//                                    conD5 = true;
+//                                }
+//                            }
+//
+//                            if (conD5 && (aux.getTrackingMethod() ==
+//                                    AugmentedImage.TrackingMethod.FULL_TRACKING)) {
+//                                fitToScanView.setVisibility(View.GONE);
+//                                arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+//                                ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(buttonFull, "alpha", 0.0f, 1.0f);
+//                                alphaAnim1.setDuration(1000);
+//                                alphaAnim1.start();
+//
+//                                conD5 = false;
+//                                aux4 = aux;
+//                            }
+
+                            if (conD10 && (aux.getTrackingMethod() ==
+                                    AugmentedImage.TrackingMethod.FULL_TRACKING)){
+                                fitToScanView.setVisibility(View.GONE);
+                                arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
+                                ValueAnimator alphaAnim2 = ObjectAnimator.ofFloat(buttonFull, "alpha", 0.0f, 1.0f);
+                                alphaAnim2.setDuration(1000);
+                                alphaAnim2.start();
+                                conD10 = false;
+                            }
+                            if (augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()) {
+                                arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+                                fitToScanView.setVisibility(View.VISIBLE);
+                                if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) {
+                                    conD5 = true;
+                                }
                             }
                             break;
                     }
@@ -507,10 +547,13 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
     }
     public void fullButton(View view){
-        if (!conD5) {
+        if (!conD5 || !conD10) {
+            Bundle bundle = new Bundle();
             onPause();
             Intent intent = new Intent(this, VideoActivity.class);
-            intent.putExtra("stateVideo", augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition());
+            bundle.putInt("stateVideo" , augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition());
+            bundle.putInt("numVideo" , aux.getIndex());
+            intent.putExtras(bundle);//"stateVideo", augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition());
             augmentedImageMap.get(aux).mediaPlayer.pause();
             arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
             ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(buttonFull,"alpha",1.0f,0.0f);
@@ -520,6 +563,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
            // startActivity(intent);
             conD5 = true;
             conD6 = true;
+            conD10 = true;
             //aux = null;
             startActivityForResult(intent, continueVideo);
         }

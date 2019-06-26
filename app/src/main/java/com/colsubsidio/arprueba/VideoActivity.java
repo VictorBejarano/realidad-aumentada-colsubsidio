@@ -44,11 +44,23 @@ public class VideoActivity extends AppCompatActivity {
 
         datos = getIntent().getExtras();
         Integer continueVideo = datos.getInt("stateVideo");
+        Integer numVideo = datos.getInt("numVideo");
+        Log.e("VideoActivity" , "loco " + String.valueOf(numVideo));
+
         videoFull = findViewById(R.id.videofull);
         String path = "android.resource://" + getPackageName() + "/" + R.raw.video;
+
+        if(numVideo == 0){
+            path = "android.resource://" + getPackageName() + "/" + R.raw.video;
+            mediaPlayer = MediaPlayer.create(this, R.raw.video);
+        }
+        if(numVideo == 2){
+            path = "android.resource://" + getPackageName() + "/" + R.raw.video2;
+            mediaPlayer = MediaPlayer.create(this, R.raw.video2);
+        }
         Uri uri = Uri.parse(path);
         videoFull.setVideoURI(uri);
-        mediaPlayer = MediaPlayer.create(this, R.raw.video);
+
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);

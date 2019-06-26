@@ -237,6 +237,57 @@ public class AugmentedImageNode extends AnchorNode {
                 objectNode.setRenderable(TextLView000.getNow(null));
                 Log.e(TAG, "Hemos " + String.valueOf(image.getIndex()));
                 break;
+            case 2:
+                ModelRenderable.builder()
+                        .setSource(context, R.raw.chroma_key_video)
+                        .build()
+                        .thenAccept(
+                                renderable -> {
+                                    videoRenderable = renderable;
+                                    renderable.getMaterial().setExternalTexture("videoTexture", texture);
+                                    //renderable.getMaterial().setFloat4("keyColor", CHROMA_KEY_COLOR);
+                                    renderable.getMaterial().setBoolean("disableChromaKey",true);
+                                })
+                        .exceptionally(
+                                throwable -> {
+                                    return null;
+                                });
+
+
+                mediaPlayer = MediaPlayer.create(context, R.raw.video2);
+                mediaPlayer.setSurface(texture.getSurface());
+                mediaPlayer.setLooping(false);
+
+                float videoWidth2 = mediaPlayer.getVideoWidth();
+                float videoHeight2 = mediaPlayer.getVideoHeight();
+
+                VIDEO_HEIGHT_METERS = image.getExtentX() * (videoHeight2 / videoWidth2);
+
+                localPosition.set( -0.0f * image.getExtentX(), 0.0f, VIDEO_HEIGHT_METERS * 0.5f);//-0.0f * image.getExtentZ());
+                objectNode = new Node();
+                objectNode.setParent(this);
+                //objectNode.setLocalRotation(Quaternion.axisAngle(Vector3.right(), -90.0f));
+                objectNode.setLocalPosition(localPosition);
+
+
+
+                objectNode.setLocalScale(
+                        new Vector3(
+                                VIDEO_HEIGHT_METERS * (videoWidth2 / videoHeight2), VIDEO_HEIGHT_METERS, 1.0f));
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.start();
+                    Node finalobjectNode = objectNode;
+                    texture
+                            .getSurfaceTexture()
+                            .setOnFrameAvailableListener(
+                                    (SurfaceTexture surfaceTexture) -> {
+                                        finalobjectNode.setRenderable(videoRenderable);
+                                        texture.getSurfaceTexture().setOnFrameAvailableListener(null);
+                                    });
+                } else {
+                    objectNode.setRenderable(videoRenderable);
+                }
+                break;
         }
 
     }

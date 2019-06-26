@@ -1,0 +1,3 @@
+000.png|C:\Users\victo\OneDrive\Desktop\windows/000.png
+001.jpg|C:\Users\victo\OneDrive\Desktop\windows/001.jpg
+002.png|C:\Users\victo\OneDrive\Desktop\windows/002.png
