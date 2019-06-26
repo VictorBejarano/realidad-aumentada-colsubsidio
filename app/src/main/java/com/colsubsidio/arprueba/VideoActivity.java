@@ -112,14 +112,17 @@ public class VideoActivity extends AppCompatActivity {
     public void exitFullButton(View view) {
 //        Intent intent = new Intent(this, AugmentedImageActivity.class);
 //        startActivity(intent);
-        exitFunction(videoFull.getCurrentPosition());
+        exitFunction(videoFull.getCurrentPosition(),false);
     }
     public void exitButton(View view){
-        exitFunction(videoFull.getDuration());
+        exitFunction(videoFull.getDuration(),true);
     }
-    public void exitFunction(int duration){
+    public void exitFunction(int duration ,boolean conditionVideo){
+        Bundle bundle = new Bundle();
+        bundle.putInt("continuar Video", duration);
+        bundle.putBoolean("video Condicional", conditionVideo);
         Intent i = getIntent();
-        i.putExtra("continuar Video", duration);
+        i.putExtras(bundle);
         Log.e("VideoActivity", "Bun A " + String.valueOf(videoFull.getCurrentPosition()));
         setResult(RESULT_OK, i);
         videoFull.pause();
@@ -163,7 +166,7 @@ public class VideoActivity extends AppCompatActivity {
 //
                         if ((videoFull.getCurrentPosition() >= videoFull.getDuration())) {
 //                        buttonPlay.setImageResource(R.drawable.ic_button_play);
-                            exitFunction(videoFull.getCurrentPosition());
+                            exitFunction(videoFull.getCurrentPosition(),true);
                             conD = false;
                             //conD2=false;
 //                        seekAudio.setProgress(0);
