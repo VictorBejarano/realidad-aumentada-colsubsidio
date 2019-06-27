@@ -7,4 +7,92 @@
     android:background="@color/colorBlueColsubsidio"
     tools:context=".SplashActivity">
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/biko_black"
+            android:text="Bienvenido"
+            android:textColor="@android:color/background_light"
+            android:textSize="48sp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/verificator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:fontFamily="@font/biko_black"
+                android:text="Introduccion:"
+                android:textColor="@android:color/background_light"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/biko_regular"
+                android:text="Para continuar debe aceptar los permisos para la Camara"
+                android:textColor="@android:color/background_light"
+                android:textSize="36sp"
+                app:autoSizeTextType="uniform" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/actionBarItemBackground"
+                    android:fontFamily="@font/biko_bold"
+                    android:onClick="acceptButton"
+                    android:text="ACEPTAR"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/actionBarItemBackground"
+                    android:fontFamily="@font/biko_bold"
+                    android:onClick="cancelButton"
+                    android:text="CANCELAR"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="24sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
