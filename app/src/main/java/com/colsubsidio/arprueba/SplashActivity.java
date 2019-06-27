@@ -121,6 +121,10 @@ public class SplashActivity extends AppCompatActivity {
     public void cancelButton(View view){
         finish();
     }
+    private void initAugmentedActivity(){
+        Intent intent = new Intent(this, AugmentedImageActivity.class);
+        startActivity(intent);
+    }
 
     private class AsyncTaskVerificator extends AsyncTask<String,Integer,String> {
 
@@ -129,8 +133,11 @@ public class SplashActivity extends AppCompatActivity {
             conD0 = true;
             while (conD0) {
                 try {
-
-
+                    int permissionCheck = (int) ContextCompat.checkSelfPermission( SplashActivity.this, Manifest.permission.CAMERA);
+                    if (permissionCheck == PackageManager.PERMISSION_GRANTED){
+                        initAugmentedActivity();
+                        conD0 = false;
+                    }
                 }
                 catch (Exception e) {
                     return e.getLocalizedMessage();
