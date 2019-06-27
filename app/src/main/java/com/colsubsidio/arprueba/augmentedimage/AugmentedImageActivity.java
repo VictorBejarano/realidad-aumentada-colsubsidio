@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -98,6 +99,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private int continueVideo = 0;
     private boolean conditionInit = false;
     private ImageView fitToScanView;
+    boolean Inicio;
 
     @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -106,9 +108,14 @@ public class AugmentedImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        cargarPreferencias();
+        Log.e(TAG , "Sasha " + String.valueOf(Inicio));
+        if(Inicio){
+            guardarPreferencias();
+        }
 
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            Slide explode = new Slide(Gravity.RIGHT);
 //            //explode.setStartDelay(2000);
 //            explode.setDuration(1000);
@@ -180,6 +187,19 @@ public class AugmentedImageActivity extends AppCompatActivity {
         anim.start();
 
         new AsyncTaskVerificator().execute();
+
+    }
+    private void guardarPreferencias(){
+        SharedPreferences prefs = getSharedPreferences("MisPreferencias" , this.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("bandera",false);
+        editor.commit();
+
+    }
+    private void cargarPreferencias(){
+
+        SharedPreferences prefs = getSharedPreferences("MisPreferencias" , this.MODE_PRIVATE);
+        Inicio = prefs.getBoolean("bandera",true);
 
     }
 
@@ -312,8 +332,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             augmentedImageMap.get(aux).mediaPlayer.start();
                             conD6 = false;
                         }
-
-
                         //obligatorio para todos
                         if (!conD7) {
                             arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux3));
@@ -342,50 +360,9 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             conD10 = true;
                         }
                         break;
-//                    case 2:
-//
-//                        if (conD10 && (aux.getTrackingMethod() ==
-//                                AugmentedImage.TrackingMethod.FULL_TRACKING)) {
-//                            fitToScanView.setVisibility(View.GONE);
-//                            arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
-//                            ValueAnimator alphaAnim2 = ObjectAnimator.ofFloat(buttonFull, "alpha", 0.0f, 1.0f);
-//                            alphaAnim2.setDuration(1000);
-//                            alphaAnim2.start();
-//                            conD10 = false;
-//                            aux4 = aux;
-//                        }
-//                        if (augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()) {
-//                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
-//                            fitToScanView.setVisibility(View.VISIBLE);
-//                            if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) {
-//                                conD10 = true;
-//                            }
-//                        }
-//                        if ((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) && !conD11) {
-//                            augmentedImageMap.get(aux).mediaPlayer.pause();
-//                            conD11 = true;
-//                        } else if ((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.FULL_TRACKING) && conD11) {
-//                            augmentedImageMap.get(aux).mediaPlayer.start();
-//                            conD11 = false;
-//                        }
-//                        break;
                 }
-
             }
         }
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-//        if(conditionInit){
-//            if(aux3 != aux){
-//
-//                arFragment.getArSceneView().getScene().addChild(augmentedImageMap.get(aux));
-//                if(conditionAux){
-//                    arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux3));
-//                }
-//                conditionAux=true;
-//            }
-//        }
-//        aux3=aux;
-
     }
     //Cierra la app si no tiene los permisos
     @Override
