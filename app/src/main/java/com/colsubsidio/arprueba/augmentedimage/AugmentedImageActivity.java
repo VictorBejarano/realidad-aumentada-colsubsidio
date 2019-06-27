@@ -73,6 +73,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     public boolean conD9 = true;
     public boolean conD10 = true;
     public boolean conD11 = true;
+    public boolean conD12 = true;
 
     private FrameLayout menuCon;
     private LinearLayout playBar;
@@ -278,14 +279,19 @@ public class AugmentedImageActivity extends AppCompatActivity {
             if(conditionInit) {
                 switch (aux.getIndex()) {
                     case 0: case 2:
-                        if (augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()) {
-                            arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
-                            fitToScanView.setVisibility(View.VISIBLE);
-                            if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) {
+                        if ((augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition() >= augmentedImageMap.get(aux).mediaPlayer.getDuration()) && !conD5) {
+                            if (conD12){
+                                arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
+                                fitToScanView.setVisibility(View.VISIBLE);
+                                ValueAnimator Anim0 = ObjectAnimator.ofFloat(buttonFull, "alpha", 1.0f, 0.0f);
+                                Anim0.setDuration(1000);
+                                Anim0.start();
+                                conD12 = false;
+                            }
+                            if (aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE){
                                 conD5 = true;
                             }
                         }
-
                         if (conD5 && (aux.getTrackingMethod() ==
                                 AugmentedImage.TrackingMethod.FULL_TRACKING)) {
                             fitToScanView.setVisibility(View.GONE);
@@ -295,8 +301,10 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             alphaAnim1.start();
 
                             conD5 = false;
+                            conD12 = true;
                             aux4 = aux;
                         }
+
                         if ((aux.getTrackingMethod() == AugmentedImage.TrackingMethod.LAST_KNOWN_POSE) && !conD6) {
                             augmentedImageMap.get(aux).mediaPlayer.pause();
                             conD6 = true;
@@ -332,8 +340,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux4));
                             conD5 = true;
                             conD10 = true;
-                            //audioView000.stop();
-                            //animPlay();
                         }
                         break;
 //                    case 2:
@@ -490,7 +496,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
             anim4.start();
             conD3=true;
         }
-
     }
     public void fullButton(View view){
         if (!conD5 || !conD10) {
