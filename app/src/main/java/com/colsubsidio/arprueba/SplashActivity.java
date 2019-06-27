@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -18,18 +19,29 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.colsubsidio.arprueba.augmentedimage.AugmentedImageActivity;
+import com.colsubsidio.arprueba.augmentedimage.helpers.CameraPermissionHelper;
+import com.google.ar.core.ArCoreApk;
+import com.google.ar.core.exceptions.UnavailableApkTooOldException;
+import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
+import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
+import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
+import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
+
+
+import java.util.EnumSet;
 
 public class SplashActivity extends AppCompatActivity {
 
     private AnimatorSet anim = new AnimatorSet();
     private TextView Welcome;
     private LinearLayout Verificator;
+    private LinearLayout Verificator2;
     private boolean conD0 = true;
+    private boolean installRequested;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +50,33 @@ public class SplashActivity extends AppCompatActivity {
 
         Welcome = findViewById(R.id.welcome);
         Verificator = findViewById(R.id.verificator);
+        Verificator2 = findViewById(R.id.verificator2);
         Welcome.setAlpha(0.0f);
         Verificator.setAlpha(0.0f);
         Verificator.setScaleY(0.01f);
         Verificator.setScaleX(0.01f);
+        Verificator2.setAlpha(0.0f);
+        Verificator2.setScaleY(0.01f);
+        Verificator2.setScaleX(0.01f);
+        Exception exception = null;
+        String message = null;
+        installRequested = false;
+
+//        try {
+//            switch (ArCoreApk.getInstance().requestInstall(this, !installRequested)) {
+//                case INSTALL_REQUESTED:
+//                    installRequested = true;
+//                    return;
+//                case INSTALLED:
+//                    break;
+//            }
+//        } catch (UnavailableUserDeclinedInstallationException e) {
+//            message = "Please install ARCore";
+//            exception = e;
+//        } catch (UnavailableDeviceNotCompatibleException e) {
+//            message = "This device does not support AR";
+//            exception = e;
+//        }
 
         ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(Welcome,"alpha",0.0f,1.0f);
         alphaAnim0.setDuration(2000);
@@ -135,7 +170,7 @@ public class SplashActivity extends AppCompatActivity {
                 try {
                     int permissionCheck = (int) ContextCompat.checkSelfPermission( SplashActivity.this, Manifest.permission.CAMERA);
                     if (permissionCheck == PackageManager.PERMISSION_GRANTED){
-                        initAugmentedActivity();
+                        //initAugmentedActivity();
                         conD0 = false;
                     }
                 }
