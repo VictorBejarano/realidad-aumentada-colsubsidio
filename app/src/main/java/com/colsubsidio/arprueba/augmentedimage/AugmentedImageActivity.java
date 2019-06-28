@@ -57,7 +57,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private AnimatorSet anim2 = new AnimatorSet();
     private AnimatorSet anim3 = new AnimatorSet();
     private AnimatorSet anim4 = new AnimatorSet();
-    //private AnimatorSet anim5 = new AnimatorSet();
+    private AnimatorSet anim5 = new AnimatorSet();
     private float MenuDp = 250.0f;
 
     private DisplayMetrics metrics = new DisplayMetrics();
@@ -109,7 +109,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         cargarPreferencias();
-        Log.e(TAG , "Sasha " + String.valueOf(Inicio));
+
         if(Inicio){
             guardarPreferencias();
         }
@@ -185,7 +185,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
         anim.play(alphaAnim0).with(alphaAnim1);
         anim.play(alphaAnim1).before(alphaAnim2);
         anim.start();
-
+        Log.e(TAG , "Sasha " + String.valueOf(Inicio));
         new AsyncTaskVerificator().execute();
 
     }
@@ -194,7 +194,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("bandera",false);
         editor.commit();
-
     }
     private void cargarPreferencias(){
 
@@ -614,6 +613,9 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
                         conD2 = false;
 
+                    } else {
+                        //continuar aqui!!!!!!!!!!!!!
+                        //Agregar animacion del cuadro
                     }
                 }
                 catch (Exception e) {
