@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.colsubsidio.arprueba.augmentedimage.AugmentedImageActivity;
 import com.colsubsidio.arprueba.augmentedimage.helpers.CameraPermissionHelper;
 import com.google.ar.core.ArCoreApk;
+import com.google.ar.core.Session;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
@@ -35,13 +36,12 @@ import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationExceptio
 import java.util.EnumSet;
 
 public class SplashActivity extends AppCompatActivity {
-
+    private boolean installRequested;
     private AnimatorSet anim = new AnimatorSet();
+    private AnimatorSet anim2 = new AnimatorSet();
     private TextView Welcome;
     private LinearLayout Verificator;
-    private LinearLayout Verificator2;
     private boolean conD0 = true;
-    private boolean installRequested;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,33 +50,10 @@ public class SplashActivity extends AppCompatActivity {
 
         Welcome = findViewById(R.id.welcome);
         Verificator = findViewById(R.id.verificator);
-        Verificator2 = findViewById(R.id.verificator2);
         Welcome.setAlpha(0.0f);
         Verificator.setAlpha(0.0f);
         Verificator.setScaleY(0.01f);
         Verificator.setScaleX(0.01f);
-        Verificator2.setAlpha(0.0f);
-        Verificator2.setScaleY(0.01f);
-        Verificator2.setScaleX(0.01f);
-        Exception exception = null;
-        String message = null;
-        installRequested = false;
-
-//        try {
-//            switch (ArCoreApk.getInstance().requestInstall(this, !installRequested)) {
-//                case INSTALL_REQUESTED:
-//                    installRequested = true;
-//                    return;
-//                case INSTALLED:
-//                    break;
-//            }
-//        } catch (UnavailableUserDeclinedInstallationException e) {
-//            message = "Please install ARCore";
-//            exception = e;
-//        } catch (UnavailableDeviceNotCompatibleException e) {
-//            message = "This device does not support AR";
-//            exception = e;
-//        }
 
         ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(Welcome,"alpha",0.0f,1.0f);
         alphaAnim0.setDuration(2000);
@@ -93,64 +70,14 @@ public class SplashActivity extends AppCompatActivity {
         anim.play(alphaAnim1).before(alphaAnim2);
         anim.play(alphaAnim2).with(alphaAnim3);
         anim.start();
+        installRequested = false;
 
         new AsyncTaskVerificator().execute();
-
-
-////
-//        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-//        // La App esta en ejecución
-//        if (permissionCheck == PackageManager.PERMISSION_GRANTED){
-//            Log.e("SplashActvity", "Sasha Permiso concedido");
-//
-//        } else if (permissionCheck == PackageManager.PERMISSION_DENIED){
-//
-//
-//            if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
-//                mostrarExplicacion();
-//
-//            }else{
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 100);
-//                Log.e("SplashActvity", "Sasha B acepto");
-//            }
-//
-//        }
-    }
-
-    private void mostrarExplicacion(){
-        new AlertDialog.Builder(this)
-                .setTitle("Autorización")
-                .setMessage("Necesito permiso para acceder a los contactos de tu dispositivo.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
-                        }
-
-                    }
-                })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //Mensaje acción cancelada
-                        mensajeAccionCancelada();
-                    }
-                })
-        .show();
-        Log.e("SplashActvity", "Sasha Permiso concedido");
-
-    }
-    public void mensajeAccionCancelada(){
-        Toast.makeText(getApplicationContext(),
-                "Haz rechazado la petición, no puede continuar con la aplicación.",
-                Toast.LENGTH_SHORT).show();
-        finish();
     }
 
     public void acceptButton(View view){
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 100);
+        verificatorFunction();
     }
 
     public void cancelButton(View view){
@@ -160,6 +87,37 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AugmentedImageActivity.class);
         startActivity(intent);
     }
+    private boolean verificatorFunction(){
+        int permissionCheck = (int) ContextCompat.checkSelfPermission( SplashActivity.this, Manifest.permission.CAMERA);
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+
+            Exception exception = null;
+            String message = null;
+            try {
+                switch (ArCoreApk.getInstance().requestInstall(SplashActivity.this, !installRequested)) {
+                    case INSTALL_REQUESTED:
+                        installRequested = true;
+                        break;
+                    case INSTALLED:
+                        initAugmentedActivity();
+                        return false;
+                }
+                //Solicita el permiso de camara
+            } catch (UnavailableUserDeclinedInstallationException e) {
+                message = "Please install ARCore";
+                exception = e;
+            } catch (UnavailableDeviceNotCompatibleException e) {
+                message = "This device does not support AR";
+                exception = e;
+            } catch (Exception e) {
+                message = "Failed to create AR session";
+                exception = e;
+            }
+
+        }
+        return true;
+
+    }
 
     private class AsyncTaskVerificator extends AsyncTask<String,Integer,String> {
 
@@ -168,11 +126,8 @@ public class SplashActivity extends AppCompatActivity {
             conD0 = true;
             while (conD0) {
                 try {
-                    int permissionCheck = (int) ContextCompat.checkSelfPermission( SplashActivity.this, Manifest.permission.CAMERA);
-                    if (permissionCheck == PackageManager.PERMISSION_GRANTED){
-                        //initAugmentedActivity();
-                        conD0 = false;
-                    }
+                    conD0 = verificatorFunction();
+
                 }
                 catch (Exception e) {
                     return e.getLocalizedMessage();
