@@ -86,6 +86,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     public boolean conD12 = true;
     public boolean conD13 = true;
     public boolean conD14 = true;
+    public boolean conD15 = true;
 
 
     private FrameLayout menuCon;
@@ -359,22 +360,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(buttonFull, "alpha", 0.0f, 1.0f);
                             alphaAnim1.setDuration(1000);
                             alphaAnim1.start();
-
-                            if(!VarAux && conD13){
-                                ValueAnimator animTemp10 = ObjectAnimator.ofFloat(Guia1, "alpha", 0.0f, 1.0f);
-                                animTemp10.setDuration(100);
-                                ValueAnimator animTemp11 = ObjectAnimator.ofFloat(Guia1, "ScaleX", 1.0f);
-                                animTemp11.setDuration(400);
-                                animTemp11.setInterpolator(new DecelerateInterpolator());
-                                ValueAnimator animTemp12 = ObjectAnimator.ofFloat(Guia1, "ScaleY", 1.0f);
-                                animTemp12.setInterpolator(new DecelerateInterpolator());
-                                animTemp12.setDuration(400);
-                                anim6.play(animTemp10).before(animTemp11);
-                                anim6.play(animTemp11).with(animTemp12);
-                                anim6.start();
-                                conD13 = false;
-                            }
-
                             conD5 = false;
                             conD12 = true;
                             aux4 = aux;
@@ -449,17 +434,37 @@ public class AugmentedImageActivity extends AppCompatActivity {
         }
     }
     public void contactButton(View view){
-        ValueAnimator animTemp0 = ObjectAnimator.ofFloat(Verificator, "alpha", 0.0f, 1.0f);
-        animTemp0.setDuration(100);
-        ValueAnimator animTemp1 = ObjectAnimator.ofFloat(Verificator, "ScaleX", 1.0f);
-        animTemp1.setDuration(400);
-        animTemp1.setInterpolator(new DecelerateInterpolator());
-        ValueAnimator animTemp2 = ObjectAnimator.ofFloat(Verificator, "ScaleY", 1.0f);
-        animTemp2.setInterpolator(new DecelerateInterpolator());
-        animTemp2.setDuration(400);
-        anim10.play(animTemp0).before(animTemp1);
-        anim10.play(animTemp1).with(animTemp2);
-        anim10.start();
+        if(conD15) {
+            ValueAnimator animTemp0 = ObjectAnimator.ofFloat(Verificator, "alpha", 0.0f, 1.0f);
+            animTemp0.setDuration(100);
+            ValueAnimator animTemp1 = ObjectAnimator.ofFloat(Verificator, "ScaleX", 1.0f);
+            animTemp1.setDuration(400);
+            animTemp1.setInterpolator(new DecelerateInterpolator());
+            ValueAnimator animTemp2 = ObjectAnimator.ofFloat(Verificator, "ScaleY", 1.0f);
+            animTemp2.setInterpolator(new DecelerateInterpolator());
+            animTemp2.setDuration(400);
+            anim10.play(animTemp0).before(animTemp1);
+            anim10.play(animTemp1).with(animTemp2);
+            anim10.start();
+            conD15 = false;
+        }
+
+    }
+    public void rightButton(View view){
+        if(conD13){
+            ValueAnimator animTemp10 = ObjectAnimator.ofFloat(Guia1, "alpha", 0.0f, 1.0f);
+            animTemp10.setDuration(100);
+            ValueAnimator animTemp11 = ObjectAnimator.ofFloat(Guia1, "ScaleX", 1.0f);
+            animTemp11.setDuration(400);
+            animTemp11.setInterpolator(new DecelerateInterpolator());
+            ValueAnimator animTemp12 = ObjectAnimator.ofFloat(Guia1, "ScaleY", 1.0f);
+            animTemp12.setInterpolator(new DecelerateInterpolator());
+            animTemp12.setDuration(400);
+            anim6.play(animTemp10).before(animTemp11);
+            anim6.play(animTemp11).with(animTemp12);
+            anim6.start();
+            conD13 = false;
+        }
     }
     public void playButton(View view){
         if(conD8) {
@@ -593,6 +598,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
         anim5.play(animTemp0).with(animTemp1);
         anim5.play(animTemp1).before(animTemp2);
         anim5.start();
+        conD15 = true;
     }
     public void guia1CerrarButton(View view){
         ValueAnimator animTemp0 = ObjectAnimator.ofFloat(Guia1, "ScaleX", 0.01f);
@@ -606,6 +612,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
         anim7.play(animTemp0).with(animTemp1);
         anim7.play(animTemp1).before(animTemp2);
         anim7.start();
+        conD13 = true;
     }
     public void guia2CerrarButton(View view){
         ValueAnimator animTemp0 = ObjectAnimator.ofFloat(Guia2, "ScaleX", 0.01f);
