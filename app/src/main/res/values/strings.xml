@@ -7,15 +7,15 @@
     <string name="bye">Bye</string>
 
     <string name="title_activity_welcome">Home Screen</string>
-    <string name="next">NEXT</string>
-    <string name="skip">SKIP</string>
-    <string name="start">GOT IT</string>
+    <string name="next">SIGUIENTE</string>
+    <string name="skip">SALTAR</string>
+    <string name="start">COMENZAR</string>
     <string name="slide_1_title">Comencemos</string>
     <string name="slide_1_desc">Presiona el boton AR y escanea el entorno para descubrir contenido adicional. Puedes empezar con una obra de arte o un codigo QR con el logo de Colsubsidio.</string>
-    <string name="slide_2_title">Meditation Techniques </string>
-    <string name="slide_2_desc">Learn about the different meditation techniques and practice them</string>
-    <string name="slide_3_title">Diet Chart</string>
-    <string name="slide_3_desc">Make your diet chart by the help of health experts</string>
+    <string name="slide_2_title">Obras de arte </string>
+    <string name="slide_2_desc">Cuando se escanea obras de artes, saldra la reseña y un reproductor con el audio guia</string>
+    <string name="slide_3_title">Codigos QR</string>
+    <string name="slide_3_desc">Escanea codigos QR con el logo de colsubsidio, aparecera el icono de pantalla completa donde podras ver mejor el video</string>
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
 

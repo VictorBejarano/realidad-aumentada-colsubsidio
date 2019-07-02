@@ -111,7 +111,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private boolean conditionInit = false;
     private ImageView fitToScanView;
     boolean Inicio;
-    boolean VarAux = false;
+    boolean VarAux = true;
     private LinearLayout Verificator;
     private LinearLayout Guia1;
     private LinearLayout Guia2;
