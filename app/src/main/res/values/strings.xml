@@ -10,8 +10,8 @@
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
-    <string name="slide_1_title">Daily Workout</string>
-    <string name="slide_1_desc">Set your daily workout routine by the help of trainer</string>
+    <string name="slide_1_title">Comencemos</string>
+    <string name="slide_1_desc">Presiona el boton AR y escanea el entorno para descubrir contenido adicional. Puedes empezar con una obra de arte o un codigo QR con el logo de Colsubsidio.</string>
     <string name="slide_2_title">Meditation Techniques </string>
     <string name="slide_2_desc">Learn about the different meditation techniques and practice them</string>
     <string name="slide_3_title">Diet Chart</string>

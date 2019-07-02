@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.colsubsidio.arprueba.augmentedimage.AugmentedImageActivity;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -115,7 +117,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, SplashActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, AugmentedImageActivity.class));
         finish();
     }
 

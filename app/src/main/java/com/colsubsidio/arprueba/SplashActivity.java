@@ -84,7 +84,7 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
     private void initAugmentedActivity(){
-        Intent intent = new Intent(this, AugmentedImageActivity.class);
+        Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
     }
     private boolean verificatorFunction(){
