@@ -199,6 +199,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?attr/actionBarItemBackground"
+                    android:onClick="guiaCerrarButton"
                     android:scaleType="fitEnd"
                     app:srcCompat="@drawable/ic_cerrar_2" />
             </LinearLayout>

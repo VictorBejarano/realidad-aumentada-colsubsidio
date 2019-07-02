@@ -102,7 +102,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private boolean conditionInit = false;
     private ImageView fitToScanView;
     boolean Inicio;
-    boolean VarAux = true;
+    boolean VarAux = false;
     private LinearLayout Verificator;
 
     @SuppressLint("WrongViewCast")
@@ -529,7 +529,17 @@ public class AugmentedImageActivity extends AppCompatActivity {
         }
     }
     public void guiaCerrarButton(View view){
-        
+        ValueAnimator animTemp0 = ObjectAnimator.ofFloat(Verificator, "ScaleX", 0.01f);
+        animTemp0.setDuration(400);
+        animTemp0.setInterpolator(new DecelerateInterpolator());
+        ValueAnimator animTemp1 = ObjectAnimator.ofFloat(Verificator, "ScaleY", 0.01f);
+        animTemp1.setInterpolator(new DecelerateInterpolator());
+        animTemp1.setDuration(400);
+        ValueAnimator animTemp2 = ObjectAnimator.ofFloat(Verificator, "alpha", 1.0f, 0.0f);
+        animTemp2.setDuration(100);
+        anim5.play(animTemp0).with(animTemp1);
+        anim5.play(animTemp1).before(animTemp2);
+        anim5.start();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
