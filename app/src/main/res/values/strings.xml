@@ -12,9 +12,9 @@
     <string name="slide_1_title">Comencemos</string>
     <string name="slide_1_desc">Presiona el botón AR y escanea el entorno para descubrir contenido adicional. Puedes empezar con una obra de arte o un código QR con el logo de Colsubsidio.</string>
     <string name="slide_2_title">Obras de arte </string>
-    <string name="slide_2_desc">Cuando se escanea obras de artes, saldrá la reseña y un reproductor con el audio guía</string>
+    <string name="slide_2_desc">Escaneando obras de arte podrás ver la reseña y un reproductor con el audioguía.</string>
     <string name="slide_3_title">Códigos QR</string>
-    <string name="slide_3_desc">Escanea códigos QR con el logo de Colsubsidio, aparecerá el icono de pantalla completa donde podrás ver mejor el video</string>
+    <string name="slide_3_desc">Escaneando códigos QR o imágenes con el logo de Colsubsidio, podrás ver el video. Si deseas ver el video en pantalla completa, presiona el botón ubicado en la parte inferior.</string>
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
 
