@@ -63,6 +63,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private AnimatorSet anim6 = new AnimatorSet();
     private AnimatorSet anim7 = new AnimatorSet();
     private AnimatorSet anim8 = new AnimatorSet();
+    private AnimatorSet anim9 = new AnimatorSet();
 
 
     private float MenuDp = 250.0f;
@@ -113,6 +114,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     boolean VarAux = false;
     private LinearLayout Verificator;
     private LinearLayout Guia1;
+    private LinearLayout Guia2;
 
     @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -154,6 +156,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
         buttonFull = findViewById(R.id.botonfull);
         Verificator = findViewById(R.id.verificator);
         Guia1 = findViewById(R.id.guia1);
+        Guia2 = findViewById(R.id.guia2);
 
         Verificator.setAlpha(0.0f);
         Verificator.setScaleY(0.01f);
@@ -162,6 +165,10 @@ public class AugmentedImageActivity extends AppCompatActivity {
         Guia1.setAlpha(0.0f);
         Guia1.setScaleY(0.01f);
         Guia1.setScaleX(0.01f);
+
+        Guia2.setAlpha(0.0f);
+        Guia2.setScaleY(0.01f);
+        Guia2.setScaleX(0.01f);
 
         arFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
         maybeEnableArButton();
@@ -412,12 +419,12 @@ public class AugmentedImageActivity extends AppCompatActivity {
                             audioView000.start();
 
                             if(!VarAux && conD14){
-                                ValueAnimator animTemp10 = ObjectAnimator.ofFloat(Guia1, "alpha", 0.0f, 1.0f);
+                                ValueAnimator animTemp10 = ObjectAnimator.ofFloat(Guia2, "alpha", 0.0f, 1.0f);
                                 animTemp10.setDuration(100);
-                                ValueAnimator animTemp11 = ObjectAnimator.ofFloat(Guia1, "ScaleX", 1.0f);
+                                ValueAnimator animTemp11 = ObjectAnimator.ofFloat(Guia2, "ScaleX", 1.0f);
                                 animTemp11.setDuration(400);
                                 animTemp11.setInterpolator(new DecelerateInterpolator());
-                                ValueAnimator animTemp12 = ObjectAnimator.ofFloat(Guia1, "ScaleY", 1.0f);
+                                ValueAnimator animTemp12 = ObjectAnimator.ofFloat(Guia2, "ScaleY", 1.0f);
                                 animTemp12.setInterpolator(new DecelerateInterpolator());
                                 animTemp12.setDuration(400);
                                 anim8.play(animTemp10).before(animTemp11);
@@ -598,6 +605,19 @@ public class AugmentedImageActivity extends AppCompatActivity {
         anim7.play(animTemp0).with(animTemp1);
         anim7.play(animTemp1).before(animTemp2);
         anim7.start();
+    }
+    public void guia2CerrarButton(View view){
+        ValueAnimator animTemp0 = ObjectAnimator.ofFloat(Guia2, "ScaleX", 0.01f);
+        animTemp0.setDuration(400);
+        animTemp0.setInterpolator(new DecelerateInterpolator());
+        ValueAnimator animTemp1 = ObjectAnimator.ofFloat(Guia2, "ScaleY", 0.01f);
+        animTemp1.setInterpolator(new DecelerateInterpolator());
+        animTemp1.setDuration(400);
+        ValueAnimator animTemp2 = ObjectAnimator.ofFloat(Guia2, "alpha", 1.0f, 0.0f);
+        animTemp2.setDuration(100);
+        anim9.play(animTemp0).with(animTemp1);
+        anim9.play(animTemp1).before(animTemp2);
+        anim9.start();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

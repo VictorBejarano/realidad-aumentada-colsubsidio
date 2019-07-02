@@ -4,5 +4,6 @@
     <string name="todo">TODO</string>
     <string name="contactos">Contactos</string>
     <string name="comencemos">Comencemos</string>
+    <string name="bye">Bye</string>
 
 </resources>
