@@ -51,6 +51,8 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.validation.Validator;
+
 public class AugmentedImageActivity extends AppCompatActivity {
 
     private AnimatorSet anim = new AnimatorSet();
@@ -100,6 +102,8 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private boolean conditionInit = false;
     private ImageView fitToScanView;
     boolean Inicio;
+    boolean VarAux = true;
+    private LinearLayout Verificator;
 
     @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -109,6 +113,9 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         cargarPreferencias();
+        ValueAnimator animTemp0 = null;
+        ValueAnimator animTemp1 = null;
+        ValueAnimator animTemp2 = null;
 
         if(Inicio){
             guardarPreferencias();
@@ -136,6 +143,12 @@ public class AugmentedImageActivity extends AppCompatActivity {
         buttonPlay = findViewById(R.id.buttonplay);
         seekAudio = findViewById(R.id.seekaudio);
         buttonFull = findViewById(R.id.botonfull);
+        Verificator = findViewById(R.id.verificator);
+
+        Verificator.setAlpha(0.0f);
+        Verificator.setScaleY(0.01f);
+        Verificator.setScaleX(0.01f);
+
         arFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
         maybeEnableArButton();
         //getWindow().setAllowEnterTransitionOverlap(false);
@@ -182,8 +195,27 @@ public class AugmentedImageActivity extends AppCompatActivity {
         ValueAnimator alphaAnim2 = ObjectAnimator.ofFloat(MainView,"translationX",-width);
         alphaAnim2.setStartDelay(500);
         alphaAnim2.setDuration(1500);
+
+        if(!VarAux) {
+            animTemp0 = ObjectAnimator.ofFloat(Verificator, "alpha", 0.0f, 1.0f);
+            animTemp0.setDuration(100);
+            animTemp1 = ObjectAnimator.ofFloat(Verificator, "ScaleX", 1.0f);
+            animTemp1.setDuration(400);
+            animTemp1.setInterpolator(new DecelerateInterpolator());
+            animTemp2 = ObjectAnimator.ofFloat(Verificator, "ScaleY", 1.0f);
+            animTemp2.setInterpolator(new DecelerateInterpolator());
+            animTemp2.setDuration(400);
+        } else {
+            Verificator.setVisibility(View.GONE);
+        }
+
         anim.play(alphaAnim0).with(alphaAnim1);
         anim.play(alphaAnim1).before(alphaAnim2);
+        if(!VarAux) {
+            anim.play(alphaAnim2).before(animTemp0);
+            anim.play(animTemp0).before(animTemp1);
+            anim.play(animTemp1).with(animTemp2);
+        }
         anim.start();
         Log.e(TAG , "Sasha " + String.valueOf(Inicio));
         new AsyncTaskVerificator().execute();
@@ -495,6 +527,9 @@ public class AugmentedImageActivity extends AppCompatActivity {
             //aux = null;
             startActivityForResult(intent, continueVideo);
         }
+    }
+    public void guiaCerrarButton(View view){
+        
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
