@@ -38,11 +38,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/actionBarItemBackground"
+                android:contentDescription="TODO"
                 android:onClick="fullButton"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_fullscreen_icon"
-                android:contentDescription="TODO" />
+                app:srcCompat="@drawable/ic_fullscreen_icon" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
@@ -62,11 +62,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/actionBarItemBackground"
+            android:contentDescription="TODO"
             android:elevation="0dp"
             android:onClick="playButton"
             android:scaleType="fitStart"
-            app:srcCompat="@drawable/ic_button_play"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/ic_button_play" />
 
         <SeekBar
             android:id="@+id/seekaudio"
@@ -94,8 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:visibility="gone">
+        android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/botonar"
@@ -118,8 +117,7 @@
         android:id="@+id/menuview"
         android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:translationX="0dp"
-        tools:visibility="gone">
+        android:translationX="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -133,6 +131,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="contactButton"
                 android:text="@string/contactos"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse" />
         </LinearLayout>
@@ -159,11 +158,10 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="?attr/actionBarItemBackground"
+        android:contentDescription="TODO"
         android:onClick="burgerButton"
         android:padding="15dp"
-        android:scaleType="fitCenter"
-        tools:visibility="gone"
-        android:contentDescription="TODO" />
+        android:scaleType="fitCenter" />
 
     <LinearLayout
         android:id="@+id/verificator"
@@ -192,7 +190,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/background_light"
                     android:fontFamily="@font/biko_bold"
-                    android:text="@string/comencemos"
+                    android:text="@string/contactos"
                     android:textColor="@android:color/black"
                     android:textSize="36sp" />
 
@@ -216,17 +214,23 @@
                 android:layout_marginBottom="10dp"
                 android:breakStrategy="simple"
                 android:fontFamily="sans-serif"
-                android:text="Presiona el boton AR y escanea el entorno para descubrir contenido adicional. Puedes empezar con una obra de arte o un codigo QR con el logo de Colsubsidio."
+                android:text="Telefono: XXX XXX XXXX"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
                 app:autoSizeTextType="none" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="240dp"
-                android:contentDescription="@string/todo"
-                app:srcCompat="@drawable/instruccion1" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:breakStrategy="simple"
+                android:fontFamily="sans-serif"
+                android:text="Correo: xxxxx@xxx.xxx"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:autoSizeTextType="none" />
 
         </LinearLayout>
 
@@ -237,7 +241,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="300dp"
@@ -302,7 +307,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="300dp"
@@ -366,39 +372,37 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:visibility="gone">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/burguer0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="TODO"
             android:padding="4dp"
-            app:srcCompat="@drawable/ic_burguer"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/ic_burguer" />
 
         <ImageView
             android:id="@+id/burguer1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="TODO"
             android:padding="4dp"
-            app:srcCompat="@drawable/ic_burguer"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/ic_burguer" />
 
         <ImageView
             android:id="@+id/burguer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="TODO"
             android:padding="4dp"
-            app:srcCompat="@drawable/ic_burguer"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/ic_burguer" />
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/mainview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:visibility="gone">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -410,8 +414,8 @@
                 android:id="@+id/logoColsubsidio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/logocolsubsidio"
-                android:contentDescription="TODO" />
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/logocolsubsidio" />
         </FrameLayout>
 
         <LinearLayout
@@ -431,12 +435,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:contentDescription="TODO"
                 android:scaleType="fitEnd"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_logosce"
-                tools:visibility="gone"
-                android:contentDescription="TODO" />
+                tools:visibility="gone" />
 
         </LinearLayout>
 

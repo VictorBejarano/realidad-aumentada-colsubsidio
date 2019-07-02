@@ -64,6 +64,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
     private AnimatorSet anim7 = new AnimatorSet();
     private AnimatorSet anim8 = new AnimatorSet();
     private AnimatorSet anim9 = new AnimatorSet();
+    private AnimatorSet anim10 = new AnimatorSet();
 
 
     private float MenuDp = 250.0f;
@@ -217,26 +218,8 @@ public class AugmentedImageActivity extends AppCompatActivity {
         alphaAnim2.setStartDelay(500);
         alphaAnim2.setDuration(1500);
 
-        if(!VarAux) {
-            animTemp0 = ObjectAnimator.ofFloat(Verificator, "alpha", 0.0f, 1.0f);
-            animTemp0.setDuration(100);
-            animTemp1 = ObjectAnimator.ofFloat(Verificator, "ScaleX", 1.0f);
-            animTemp1.setDuration(400);
-            animTemp1.setInterpolator(new DecelerateInterpolator());
-            animTemp2 = ObjectAnimator.ofFloat(Verificator, "ScaleY", 1.0f);
-            animTemp2.setInterpolator(new DecelerateInterpolator());
-            animTemp2.setDuration(400);
-        } else {
-            Verificator.setVisibility(View.GONE);
-        }
-
         anim.play(alphaAnim0).with(alphaAnim1);
         anim.play(alphaAnim1).before(alphaAnim2);
-        if(!VarAux) {
-            anim.play(alphaAnim2).before(animTemp0);
-            anim.play(animTemp0).before(animTemp1);
-            anim.play(animTemp1).with(animTemp2);
-        }
         anim.start();
         Log.e(TAG , "Sasha " + String.valueOf(Inicio));
         new AsyncTaskVerificator().execute();
@@ -465,6 +448,19 @@ public class AugmentedImageActivity extends AppCompatActivity {
             finish();
         }
     }
+    public void contactButton(View view){
+        ValueAnimator animTemp0 = ObjectAnimator.ofFloat(Verificator, "alpha", 0.0f, 1.0f);
+        animTemp0.setDuration(100);
+        ValueAnimator animTemp1 = ObjectAnimator.ofFloat(Verificator, "ScaleX", 1.0f);
+        animTemp1.setDuration(400);
+        animTemp1.setInterpolator(new DecelerateInterpolator());
+        ValueAnimator animTemp2 = ObjectAnimator.ofFloat(Verificator, "ScaleY", 1.0f);
+        animTemp2.setInterpolator(new DecelerateInterpolator());
+        animTemp2.setDuration(400);
+        anim10.play(animTemp0).before(animTemp1);
+        anim10.play(animTemp1).with(animTemp2);
+        anim10.start();
+    }
     public void playButton(View view){
         if(conD8) {
             audioView000.pause();
@@ -480,30 +476,30 @@ public class AugmentedImageActivity extends AppCompatActivity {
         }
     }
     public void mainButton(View view){
-        if(!conD){
+        if(!conD) {
 //        arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
 //        mSession.close();
 //        finish();
 
-        FrameLayout whitewindow = (FrameLayout) findViewById(R.id.whitewindow);
-        ImageButton botonAR = (ImageButton) findViewById(R.id.botonar);
+            FrameLayout whitewindow = (FrameLayout) findViewById(R.id.whitewindow);
+            ImageButton botonAR = (ImageButton) findViewById(R.id.botonar);
 //        whitewindow.setVisibility(View.GONE);
 //        botonAR.setVisibility(View.GONE);
 
 //        ConstraintLayout MainView = (ConstraintLayout) findViewById(R.id.mainview);
-        ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(whitewindow,"alpha",1.0f,0.0f);
-        alphaAnim0.setDuration(2000);
-        ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(botonAR,"alpha",1.0f,0.0f);
-        alphaAnim1.setDuration(2000);
-        ValueAnimator alphaAnim2 = ObjectAnimator.ofFloat(fitToScanView,"alpha",0.0f,1.0f);
-        alphaAnim2.setDuration(3000);
+            ValueAnimator alphaAnim0 = ObjectAnimator.ofFloat(whitewindow, "alpha", 1.0f, 0.0f);
+            alphaAnim0.setDuration(2000);
+            ValueAnimator alphaAnim1 = ObjectAnimator.ofFloat(botonAR, "alpha", 1.0f, 0.0f);
+            alphaAnim1.setDuration(2000);
+            ValueAnimator alphaAnim2 = ObjectAnimator.ofFloat(fitToScanView, "alpha", 0.0f, 1.0f);
+            alphaAnim2.setDuration(3000);
 
-        anim2.play(alphaAnim0).with(alphaAnim1);
-        anim2.play(alphaAnim1).with(alphaAnim2);
-        anim2.start();
-        conD2 = true;
-        conD4 = false;
-        new AsyncTaskVerificatorB().execute();
+            anim2.play(alphaAnim0).with(alphaAnim1);
+            anim2.play(alphaAnim1).with(alphaAnim2);
+            anim2.start();
+            conD2 = true;
+            conD4 = false;
+            new AsyncTaskVerificatorB().execute();
         }
     }
     public void burgerButton(View view){
