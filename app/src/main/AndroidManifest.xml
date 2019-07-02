@@ -14,15 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.google.ar.core"
-            android:value="required" />
-
         <activity
-            android:name=".augmentedimage.AugmentedImageActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".SplashActivity"
+            android:name=".WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,10 +23,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.ar.core"
+            android:value="required" />
+
+        <activity
+            android:name=".augmentedimage.AugmentedImageActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
         <activity
             android:name=".VideoActivity"
-            android:screenOrientation="sensorLandscape"
-            android:configChanges="screenSize|orientation"></activity>
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>
