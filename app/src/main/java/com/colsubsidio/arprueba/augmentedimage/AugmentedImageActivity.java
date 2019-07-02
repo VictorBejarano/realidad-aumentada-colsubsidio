@@ -256,6 +256,11 @@ public class AugmentedImageActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 

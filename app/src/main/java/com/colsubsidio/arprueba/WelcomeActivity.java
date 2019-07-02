@@ -92,6 +92,11 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
+
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
 
