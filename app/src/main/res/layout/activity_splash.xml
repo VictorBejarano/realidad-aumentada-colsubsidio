@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBlueColsubsidio"
-    tools:context=".SplashActivity">
+    tools:context=".splash.view.SplashActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"

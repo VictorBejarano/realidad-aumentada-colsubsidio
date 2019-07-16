@@ -27,7 +27,7 @@
             android:name=".augmentedimage.AugmentedImageActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
