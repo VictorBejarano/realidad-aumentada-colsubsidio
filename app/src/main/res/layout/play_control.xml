@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/playBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:alpha="0.60"
+        android:background="@android:color/background_dark"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="363dp">
+
+        <ImageButton
+            android:id="@+id/buttonPlayVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="?attr/actionBarItemBackground"
+            android:onClick="playButton"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_button_play"
+            tools:layout_editor_absoluteY="168dp" />
+
+        <SeekBar
+            android:id="@+id/seekVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:max="100"
+            android:progress="59"
+            android:progressBackgroundTint="@android:color/background_light"
+            android:progressTint="@android:color/background_light"
+            android:thumb="@drawable/ic_seekbar_circle"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageButton
+            android:id="@+id/exitFullScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="?attr/actionBarItemBackground"
+            android:onClick="exitFullButton"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_icon"
+            tools:layout_editor_absoluteY="168dp" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

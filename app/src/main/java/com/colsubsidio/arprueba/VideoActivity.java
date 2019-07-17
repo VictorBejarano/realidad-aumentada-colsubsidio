@@ -39,8 +39,8 @@ public class VideoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-        seekVideo = findViewById(R.id.seekvideo);
-        buttonPlay = findViewById(R.id.buttonplayvideo);
+        seekVideo = findViewById(R.id.seekVideo);
+        buttonPlay = findViewById(R.id.buttonPlayVideo);
 
         datos = getIntent().getExtras();
         Integer continueVideo = datos.getInt("stateVideo");

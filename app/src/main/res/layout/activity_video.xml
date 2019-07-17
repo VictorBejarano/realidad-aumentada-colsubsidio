@@ -23,50 +23,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/playbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.60"
-            android:background="@android:color/background_dark"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/playbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:alpha="0.60"-->
+            <!--android:background="@android:color/background_dark"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent">-->
 
-            <ImageButton
-                android:id="@+id/buttonplayvideo"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/actionBarItemBackground"
-                android:onClick="playButton"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_button_play"
-                tools:layout_editor_absoluteY="168dp" />
+            <!--<ImageButton-->
+                <!--android:id="@+id/buttonplayvideo"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="?attr/actionBarItemBackground"-->
+                <!--android:onClick="playButton"-->
+                <!--android:scaleType="fitCenter"-->
+                <!--app:srcCompat="@drawable/ic_button_play"-->
+                <!--tools:layout_editor_absoluteY="168dp" />-->
 
-            <SeekBar
-                android:id="@+id/seekvideo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:max="100"
-                android:progress="59"
-                android:progressBackgroundTint="@android:color/background_light"
-                android:progressTint="@android:color/background_light"
-                android:thumb="@drawable/ic_seekbar_circle"
-                app:layout_constraintBottom_toBottomOf="parent" />
+            <!--<SeekBar-->
+                <!--android:id="@+id/seekvideo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:max="100"-->
+                <!--android:progress="59"-->
+                <!--android:progressBackgroundTint="@android:color/background_light"-->
+                <!--android:progressTint="@android:color/background_light"-->
+                <!--android:thumb="@drawable/ic_seekbar_circle"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent" />-->
 
-            <ImageButton
-                android:id="@+id/exitfullscreen"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/actionBarItemBackground"
-                android:onClick="exitFullButton"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_icon"
-                tools:layout_editor_absoluteY="168dp" />
-        </LinearLayout>
+            <!--<ImageButton-->
+                <!--android:id="@+id/exitfullscreen"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="?attr/actionBarItemBackground"-->
+                <!--android:onClick="exitFullButton"-->
+                <!--android:scaleType="fitCenter"-->
+                <!--app:srcCompat="@drawable/ic_icon"-->
+                <!--tools:layout_editor_absoluteY="168dp" />-->
+        <!--</LinearLayout>-->
+
+        <include
+            layout="@layout/play_control"/>
 
         <ImageButton
             android:id="@+id/imageButton2"
