@@ -45,4 +45,19 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     public void setFirstTimeLaunch(boolean isFirstTime) {
         interactor.setFirstTimeLaunch(isFirstTime);
     }
+
+    @Override
+    public void addBottomDots(int currentPage) {
+        WelcomeView.addBottomDots(currentPage);
+    }
+
+    @Override
+    public void changeStatusBarColor() {
+        WelcomeView.changeStatusBarColor();
+    }
+
+    @Override
+    public int getItem(int i) {
+        return WelcomeView.getItem(i);
+    }
 }

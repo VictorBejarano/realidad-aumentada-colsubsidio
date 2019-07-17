@@ -2,10 +2,14 @@ package com.colsubsidio.arprueba.wellcome.interactor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.colsubsidio.arprueba.wellcome.presenter.WelcomePresenter;
 
 public class WelcomeInteractorImpl implements WelcomeInteractor {
+
     private WelcomePresenter presenter;
 
     int PRIVATE_MODE = 0;
@@ -45,4 +49,5 @@ public class WelcomeInteractorImpl implements WelcomeInteractor {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
         editor.commit();
     }
+
 }

@@ -9,4 +9,7 @@ public interface WelcomePresenter {
     void finishWelcome();
     boolean isFirstTimeLaunch();
     void setFirstTimeLaunch(boolean isFirstTime);
+    void addBottomDots(int currentPage);
+    void changeStatusBarColor();
+    int getItem(int i);
 }
