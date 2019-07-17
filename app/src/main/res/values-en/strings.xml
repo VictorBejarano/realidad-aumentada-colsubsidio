@@ -2,4 +2,11 @@
 <resources>
     <string name="error_splash">Error:</string>
     <string name="error_version">Version de android no compatible</string>
+    <!--Splash's strings-->
+    <string name="text_welcome_splash">Welcome</string>
+    <string name="text_introtitle_splash">Introduction:</string>
+    <string name="text_introtext_splash">To continue you must accept the permits for the Camera, then install the ARCore application</string>
+    <string name="text_acceptbutton_splash">ACCEPT</string>
+    <string name="text_cancelbutton_splash">CANCEL</string>
+
 </resources>

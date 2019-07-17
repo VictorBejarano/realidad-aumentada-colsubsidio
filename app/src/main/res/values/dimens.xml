@@ -10,4 +10,12 @@
     <dimen name="slide_title">40dp</dimen>
     <dimen name="slide_desc">20dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
+    <!--Splash's dimens-->
+    <dimen name="textsize_welcome_splash">48sp</dimen>
+    <dimen name="linearlayout_sqwidth_splash">300dp</dimen>
+    <dimen name="sqlL_padding_splash">20dp</dimen>
+    <dimen name="textsize_introtitle_splash">36sp</dimen>
+    <dimen name="margin_introtext_splash">10dp</dimen>
+    <dimen name="textsize_introtext_splash">36sp</dimen>
+    <dimen name="textsize_button_splash">24sp</dimen>
 </resources>

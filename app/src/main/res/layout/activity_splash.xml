@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorBlueColsubsidio"
     tools:context=".splash.view.SplashActivity">
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
@@ -15,83 +14,73 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <TextView
             android:id="@+id/welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/biko_black"
-            android:text="Bienvenido"
+            android:text="@string/text_welcome_splash"
             android:textColor="@android:color/background_light"
-            android:textSize="48sp" />
+            android:textSize="@dimen/textsize_welcome_splash" />
     </FrameLayout>
-
     <LinearLayout
         android:id="@+id/verificator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="@dimen/linearlayout_sqwidth_splash"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:orientation="vertical"
-            android:padding="20dp">
-
+            android:padding="@dimen/sqlL_padding_splash">
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/introTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/biko_black"
-                android:text="Introduccion:"
+                android:text="@string/text_introtitle_splash"
                 android:textColor="@android:color/black"
-                android:textSize="36sp" />
-
+                android:textSize="@dimen/textsize_introtitle_splash" />
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/introText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="@dimen/margin_introtext_splash"
+                android:layout_marginBottom="@dimen/margin_introtext_splash"
                 android:fontFamily="@font/biko_regular"
-                android:text="Para continuar debe aceptar los permisos para la Camara, posteriormente instalar la aplicacion de ARCore"
+                android:text="@string/text_introtext_splash"
                 android:textColor="@android:color/black"
-                android:textSize="36sp"
+                android:textSize="@dimen/textsize_introtext_splash"
                 app:autoSizeTextType="uniform" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/acceptButtonSplash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?attr/actionBarItemBackground"
                     android:fontFamily="@font/biko_bold"
                     android:onClick="acceptButton"
-                    android:text="ACEPTAR"
+                    android:text="@string/text_acceptbutton_splash"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp" />
-
+                    android:textSize="@dimen/textsize_button_splash" />
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/cancelButtonSplash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?attr/actionBarItemBackground"
                     android:fontFamily="@font/biko_bold"
                     android:onClick="cancelButton"
-                    android:text="CANCELAR"
+                    android:text="@string/text_cancelbutton_splash"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/textsize_button_splash" />
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

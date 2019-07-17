@@ -19,4 +19,10 @@
     <string name="play_again">Play Again</string>
     <string name="error_splash">Error:</string>
     <string name="error_version">Version de android no compatible</string>
+    <!--Splash's strings-->
+    <string name="text_welcome_splash">Bienvenido</string>
+    <string name="text_introtitle_splash">Introducción:</string>
+    <string name="text_introtext_splash">Para continuar debe aceptar los permisos para la Cámara, posteriormente instalar la aplicación de ARCore</string>
+    <string name="text_acceptbutton_splash">ACEPTAR</string>
+    <string name="text_cancelbutton_splash">CANCELAR</string>
 </resources>
