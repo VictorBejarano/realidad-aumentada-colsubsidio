@@ -1,18 +1,12 @@
 package com.colsubsidio.arprueba.splash.view;
 
-import android.Manifest;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
@@ -20,12 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.colsubsidio.arprueba.R;
-import com.colsubsidio.arprueba.WelcomeActivity;
+import com.colsubsidio.arprueba.wellcome.view.WelcomeActivity;
 import com.colsubsidio.arprueba.splash.presenter.SplashPresenter;
 import com.colsubsidio.arprueba.splash.presenter.SplashPresenterImpl;
-import com.google.ar.core.ArCoreApk;
-import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
-import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 
 public class SplashActivity extends AppCompatActivity implements SplashView{
 

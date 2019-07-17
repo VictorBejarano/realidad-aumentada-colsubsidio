@@ -1,4 +1,4 @@
-package com.colsubsidio.arprueba;
+package com.colsubsidio.arprueba.wellcome.view;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,9 +17,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.colsubsidio.arprueba.PreferenceManager;
+import com.colsubsidio.arprueba.R;
 import com.colsubsidio.arprueba.augmentedimage.AugmentedImageActivity;
+import com.colsubsidio.arprueba.wellcome.presenter.WelcomePresenter;
+import com.colsubsidio.arprueba.wellcome.presenter.WelcomePresenterImpl;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity implements WelcomeView {
+    private WelcomePresenter presenter;
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -33,12 +38,17 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Checking for first time launch - before calling setContentView()
-        prefManager = new PreferenceManager(this);
-        if (!prefManager.isFirstTimeLaunch()) {
-            launchHomeScreen();
-            finish();
-        }
+        presenter = new WelcomePresenterImpl(this);
+
+        presenter.PreferenceManager(this);
+        presenter.checkFistTimeLaunch();
+
+//        // Checking for first time launch - before calling setContentView()
+//        prefManager = new PreferenceManager(this);
+//        if (!prefManager.isFirstTimeLaunch()) {
+//            launchHomeScreen();
+//            finish();
+//        }
 
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
@@ -120,12 +130,6 @@ public class WelcomeActivity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
-    private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, AugmentedImageActivity.class));
-        finish();
-    }
-
     //  viewpager change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
@@ -164,6 +168,20 @@ public class WelcomeActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
+    @Override
+    public void launchHomeScreen() {
+        presenter.setFirstTimeLaunch(false);
+//        prefManager.setFirstTimeLaunch(false);
+        startActivity(new Intent(WelcomeActivity.this, AugmentedImageActivity.class));
+        finish();
+    }
+
+    @Override
+    public void finishWelcome() {
+        finish();
+    }
+
     /**
      * View pager adapter
      */

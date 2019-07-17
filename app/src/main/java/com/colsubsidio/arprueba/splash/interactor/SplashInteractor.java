@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 
 public interface SplashInteractor {
-    Boolean checkVersion();
+    boolean checkVersion();
     void InitialAnimation();
     void requestPermissionCamera(Activity activity);
-    Boolean checkPermissionCamera(Context context,Boolean installRequested);
-    Boolean checkARCore(Context context,Boolean installRequested);
+    boolean checkPermissionCamera(Context context,Boolean installRequested);
+    boolean checkARCore(Context context,Boolean installRequested);
 }

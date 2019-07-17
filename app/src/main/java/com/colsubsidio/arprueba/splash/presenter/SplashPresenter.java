@@ -12,7 +12,7 @@ public interface SplashPresenter {
     void goWelcome();
     void cerrarApp();
     void requestPermissionCamera(Activity activity);
-    Boolean checkVersion();
-    Boolean checkPermissionCamera(Context context,Boolean installRequested);
-    Boolean chekARCore(Context context,Boolean installRequested);
+    boolean checkVersion();
+    boolean checkPermissionCamera(Context context,Boolean installRequested);
+    boolean chekARCore(Context context,Boolean installRequested);
 }

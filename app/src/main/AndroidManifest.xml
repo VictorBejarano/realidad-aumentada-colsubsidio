@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".wellcome.view.WelcomeActivity"
             android:screenOrientation="portrait">
         </activity>
 

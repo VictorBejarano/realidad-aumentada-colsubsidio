@@ -24,7 +24,7 @@ public class SplashInteractorImpl implements SplashInteractor {
     }
 
     @Override
-    public Boolean checkVersion() {
+    public boolean checkVersion() {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) {
             presenter.splashError(presenter.getValueString(R.string.error_version));
             presenter.cerrarApp();
@@ -46,7 +46,7 @@ public class SplashInteractorImpl implements SplashInteractor {
     }
 
     @Override
-    public Boolean checkPermissionCamera(Context context,Boolean installRequested) {
+    public boolean checkPermissionCamera(Context context,Boolean installRequested) {
         int permissionCheck = (int) ContextCompat.checkSelfPermission( context, Manifest.permission.CAMERA);
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             return presenter.chekARCore(context,installRequested);
@@ -56,7 +56,7 @@ public class SplashInteractorImpl implements SplashInteractor {
     }
 
     @Override
-    public Boolean checkARCore(Context context, Boolean installRequested) {
+    public boolean checkARCore(Context context, Boolean installRequested) {
         Exception exception = null;
         String message = null;
         try {

@@ -59,17 +59,17 @@ public class SplashPresenterImpl implements SplashPresenter {
     }
 
     @Override
-    public Boolean checkVersion() {
+    public boolean checkVersion() {
         return interactor.checkVersion();
     }
 
     @Override
-    public Boolean checkPermissionCamera(Context context,Boolean installRequested) {
+    public boolean checkPermissionCamera(Context context,Boolean installRequested) {
         return interactor.checkPermissionCamera(context,installRequested);
     }
 
     @Override
-    public Boolean chekARCore(Context context,Boolean installRequested) {
+    public boolean chekARCore(Context context,Boolean installRequested) {
         return interactor.checkARCore(context, installRequested);
     }
 }
