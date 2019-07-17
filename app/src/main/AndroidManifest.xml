@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".VideoActivity"
+            android:name=".videofullscreen.view.VideoActivity"
             android:configChanges="screenSize|orientation"
             android:screenOrientation="sensorLandscape" />
     </application>

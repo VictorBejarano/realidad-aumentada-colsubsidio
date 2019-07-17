@@ -27,7 +27,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.colsubsidio.arprueba.R;
-import com.colsubsidio.arprueba.VideoActivity;
+import com.colsubsidio.arprueba.videofullscreen.view.VideoActivity;
 import com.colsubsidio.arprueba.augmentedimage.helpers.CameraPermissionHelper;
 import com.colsubsidio.arprueba.augmentedimage.helpers.SnackbarHelper;
 import com.google.ar.core.ArCoreApk;
@@ -50,8 +50,6 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.validation.Validator;
 
 public class AugmentedImageActivity extends AppCompatActivity {
 
@@ -570,6 +568,9 @@ public class AugmentedImageActivity extends AppCompatActivity {
             Intent intent = new Intent(this, VideoActivity.class);
             bundle.putInt("stateVideo" , augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition());
             bundle.putInt("numVideo" , aux.getIndex());
+            bundle.putInt("videoWidth" , augmentedImageMap.get(aux).mediaPlayer.getVideoWidth());
+            bundle.putInt("videoHeight" , augmentedImageMap.get(aux).mediaPlayer.getVideoHeight());
+
             intent.putExtras(bundle);//"stateVideo", augmentedImageMap.get(aux).mediaPlayer.getCurrentPosition());
             augmentedImageMap.get(aux).mediaPlayer.pause();
             arFragment.getArSceneView().getScene().removeChild(augmentedImageMap.get(aux));
