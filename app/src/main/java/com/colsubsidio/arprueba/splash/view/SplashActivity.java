@@ -42,19 +42,22 @@ public class SplashActivity extends AppCompatActivity implements SplashView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Welcome     = findViewById(R.id.welcome);
-        Verificator = findViewById(R.id.verificator);
-
-        Welcome     .setAlpha(0.0f);
-        Verificator .setAlpha(0.0f);
-        Verificator .setScaleY(0.01f);
-        Verificator .setScaleX(0.01f);
-
         presenter = new SplashPresenterImpl(this);
-        presenter.InitialAnimation();
+        if(presenter.checkVersion()) {
 
-        installRequested = false;
-        new AsyncTaskVerificator().execute();
+            Welcome = findViewById(R.id.welcome);
+            Verificator = findViewById(R.id.verificator);
+
+            Welcome.setAlpha(0.0f);
+            Verificator.setAlpha(0.0f);
+            Verificator.setScaleY(0.01f);
+            Verificator.setScaleX(0.01f);
+
+            presenter.InitialAnimation();
+
+            installRequested = false;
+            new AsyncTaskVerificator().execute();
+        }
     }
 
     public void acceptButton(View view){
@@ -88,13 +91,14 @@ public class SplashActivity extends AppCompatActivity implements SplashView{
     }
 
     @Override
-    public void checkVersion() {
-
+    public void splashError(String error) {
+        Toast.makeText(this,
+                getString(R.string.error_splash) + " " + error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void splashError(String error) {
-        Toast.makeText(this, getString(R.string.error_splash) + error, Toast.LENGTH_SHORT).show();
+    public String getValueString(Integer value) {
+        return getString(value);
     }
 
     @Override

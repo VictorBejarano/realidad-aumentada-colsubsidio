@@ -18,5 +18,5 @@
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
     <string name="error_splash">Error:</string>
-
+    <string name="error_version">Version de android no compatible</string>
 </resources>

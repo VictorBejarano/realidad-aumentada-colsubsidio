@@ -23,6 +23,11 @@ public class SplashPresenterImpl implements SplashPresenter {
     }
 
     @Override
+    public String getValueString(Integer value) {
+        return SplashView.getValueString(value);
+    }
+
+    @Override
     public void animationWelcome() {
         SplashView.animationWelcome();
     }
@@ -43,9 +48,19 @@ public class SplashPresenterImpl implements SplashPresenter {
     }
 
     @Override
+    public void cerrarApp() {
+        SplashView.buttonCancel();
+    }
+
+    @Override
     public void requestPermissionCamera(Activity activity) {
         interactor.requestPermissionCamera(activity);
 
+    }
+
+    @Override
+    public Boolean checkVersion() {
+        return interactor.checkVersion();
     }
 
     @Override
